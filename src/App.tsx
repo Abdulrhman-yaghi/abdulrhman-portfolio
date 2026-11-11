@@ -1,122 +1,486 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
-
+import { useState } from "react";
+import { profile } from "./config";
+import "./App.css";
+const Arrow = () => <span aria-hidden="true">↗</span>;
+const projects = [
+  {
+    id: "vkhbp",
+    title: "VKHBP Admin Web",
+    type: "PROFESSIONAL · LARAVEL",
+    subtitle: "Backend work behind everyday operations.",
+    goal: "Support the backend workflows of an admin application.",
+    contribution:
+      "Contributed to the virtual office catalog, workshop reminders, and authentication workflows.",
+    verification:
+      "The scope shown here reflects my backend contributions. Specific fixes and verification results require supporting evidence and permission before publication.",
+    tags: ["Laravel", "Backend workflows", "Authentication"],
+  },
+  {
+    id: "dishly",
+    title: "Dishly",
+    type: "BOOTCAMP CAPSTONE · DJANGO",
+    subtitle: "From ingredients to a working recipe app.",
+    goal: "Build a recipe application as a Django bootcamp capstone.",
+    contribution:
+      "Worked on recipes, ingredients, categories, likes, and authentication with PostgreSQL.",
+    verification:
+      "These features describe the capstone scope. A test report or verified demo is not yet included.",
+    tags: ["Python", "Django", "PostgreSQL"],
+  },
+  {
+    id: "tasks",
+    title: "Laravel Tasks API",
+    type: "PERSONAL PROJECT · LARAVEL",
+    subtitle: "A focused foundation for a task API.",
+    goal: "Practice building task endpoints with clear request handling.",
+    contribution:
+      "Implemented task endpoints, request validation, and user registration.",
+    verification:
+      "The implementation scope is documented here. Reproduction steps and fix details for the DELETE-route issue are needed before presenting it as a debugging case study.",
+    tags: ["REST API", "Validation", "Registration"],
+  },
+] as const;
+function ProjectVisual({ id }: { id: string }) {
+  return (
+    <div
+      className="project-visual"
+      aria-label="Illustrative architecture diagram"
+    >
+      <div className="diagram-label">
+        <span>
+          {id === "vkhbp"
+            ? "WORKFLOW MAP"
+            : id === "dishly"
+              ? "RELATIONSHIP MAP"
+              : "REQUEST TRACE"}
+        </span>
+        <span>ILLUSTRATIVE</span>
+      </div>
+      {id === "vkhbp" ? (
+        <div className="workflow">
+          <div className="mini-node">Admin application</div>
+          <div className="branch-line" />
+          <div className="node-row">
+            <span>Office catalog</span>
+            <span>Reminders</span>
+            <span>Authentication</span>
+          </div>
+        </div>
+      ) : id === "dishly" ? (
+        <div className="schema">
+          <div>
+            <b>recipes</b>
+            <span>id · title</span>
+            <span>category_id</span>
+          </div>
+          <span className="relation">↔</span>
+          <div>
+            <b>ingredients</b>
+            <span>id · name</span>
+            <span>recipe relation</span>
+          </div>
+        </div>
+      ) : (
+        <div className="trace">
+          <div>
+            <b>POST</b>
+            <span>/tasks</span>
+            <i>→</i>
+          </div>
+          <div>
+            ◇<span>Validate request</span>
+            <i>✓</i>
+          </div>
+          <div>
+            ◇<span>Application logic</span>
+            <i>✓</i>
+          </div>
+          <div>
+            ◇<span>JSON response</span>
+            <i>↗</i>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [paused, setPaused] = useState(false);
+  const [copyStatus, setCopyStatus] = useState("");
+  const brief =
+    "Application: Laravel / Django\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
+  async function copyBrief() {
+    try {
+      await navigator.clipboard.writeText(brief);
+      setCopyStatus("Template copied to clipboard.");
+    } catch {
+      setCopyStatus("Select and copy the template above.");
+    }
+  }
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      <a className="skip-link" href="#main">
+        Skip to content
+      </a>
+      <header className="header wrap">
+        <a className="brand" href="#home" aria-label="Abdulrhman Yaghi home">
+          <img
+            src={`${import.meta.env.BASE_URL}monogram.svg`}
+            alt=""
+            width="43"
+            height="40"
+          />
+          <span>
+            Abdulrhman Yaghi<small>BACKEND DEVELOPER</small>
+          </span>
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a className="nav-contact" href="#contact">
+            Let’s talk <Arrow />
+          </a>
+        </nav>
+      </header>
+      <main id="main">
+        <section className="hero wrap" id="home">
+          <div>
+            <div className="eyebrow">
+              <span className="status-dot" /> BACKEND DEVELOPER · AMMAN, JORDAN
+            </div>
+            <h1>
+              I fix bugs in
+              <br />
+              <span>Laravel</span> and
+              <br />
+              <span>Django</span> applications<span>.</span>
+            </h1>
+            <p className="hero-description">
+              Broken APIs. Database errors. Login issues.
+              <br />
+              Background jobs that fail. Let’s find the cause
+              <br className="desktop-break" /> and get your application working
+              again.
+            </p>
+            <div className="actions">
+              <a className="button primary" href="#contact">
+                Tell me about your bug <Arrow />
+              </a>
+              <a className="text-link" href="#work">
+                View my work ↓
+              </a>
+            </div>
+            <p className="experience">
+              ⌘ &nbsp; Laravel is my strongest professional experience.
+            </p>
+          </div>
+          <div className={`hero-art ${paused ? "paused" : ""}`}>
+            <div className="art-heading">
+              <span>ANATOMY OF A FIX</span>
+              <span>TRACE / 001</span>
+            </div>
+            <div
+              className="scene"
+              role="img"
+              aria-label="Illustrative request flowing through an API, application logic and a database. An amber error resolves to teal."
+            >
+              <div className="scene-grid" />
+              <div className="connection one" />
+              <div className="connection two" />
+              <div className="packet" />
+              {[
+                ["API", "REQUEST IN", "↗"],
+                ["Application", "TRACE THE CAUSE", "</>"],
+                ["Database", "FOLLOW THE DATA", "▤"],
+              ].map(([title, label, icon], i) => (
+                <div className={`stage stage-${i}`} key={title}>
+                  <span className="stage-number">0{i + 1}</span>
+                  <div className="stage-icon">{icon}</div>
+                  <b>{title}</b>
+                  <small>{label}</small>
+                </div>
+              ))}
+              <span className="request-label">request → response</span>
+            </div>
+            <div className="terminal">
+              <div>
+                <span>❯</span> trace.request <em>--inspect</em>
+              </div>
+              <div className="terminal-result">
+                <span className="status-dot" /> Root cause → fix → verified
+                workflow <span>✓</span>
+              </div>
+            </div>
+            <div className="art-footer">
+              <span>ILLUSTRATIVE REQUEST FLOW</span>
+              <button onClick={() => setPaused(!paused)} aria-pressed={paused}>
+                {paused ? "Play animation ▷" : "Pause animation Ⅱ"}
+              </button>
+            </div>
+          </div>
+        </section>
+        <div className="skills-band">
+          <div className="wrap skills-inner">
+            <span className="mono">MY CORE STACK</span>
+            <div>
+              {[
+                "PHP",
+                "Laravel",
+                "Python",
+                "Django",
+                "REST APIs",
+                "SQL",
+                "PostgreSQL",
+                "Git",
+              ].map((s) => (
+                <span key={s}>{s}</span>
+              ))}
+            </div>
+          </div>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+        <section className="section wrap" id="services">
+          <div className="section-heading">
+            <div>
+              <div className="eyebrow">01 / HOW I CAN HELP</div>
+              <h2>
+                Something’s broken.
+                <br />
+                Let’s work through it.
+              </h2>
+            </div>
+            <p>
+              Focused help for existing applications.
+              <br />A clear problem, a careful investigation,
+              <br />
+              and a fix you can understand.
+            </p>
+          </div>
+          <div className="services-grid">
+            {[
+              [
+                "{ }",
+                "Laravel & Django bug fixes",
+                "Unexpected errors or a feature that stopped working? I reproduce the issue and trace it through your application.",
+              ],
+              [
+                "↔",
+                "APIs & authentication",
+                "Broken endpoints, validation errors, login problems, and access issues across your API and authentication flows.",
+              ],
+              [
+                "▤",
+                "SQL & database problems",
+                "Query errors, incorrect results, and relationship problems. I follow the data to understand where things go wrong.",
+              ],
+              [
+                "⌁",
+                "Queues & deployments",
+                "Laravel jobs that fail, reminders that don’t run, and configuration issues that appear during deployment.",
+              ],
+            ].map(([icon, title, text], i) => (
+              <article className="service" key={title}>
+                <div className="service-top">
+                  <span>{icon}</span>
+                  <small>0{i + 1}</small>
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="section work-section wrap" id="work">
+          <div className="section-heading">
+            <div>
+              <div className="eyebrow">02 / SELECTED WORK</div>
+              <h2>Behind the endpoints.</h2>
+            </div>
+            <p>
+              Professional Laravel contributions.
+              <br />
+              Practical Django experience.
+              <br />
+              Personal projects built to learn.
+            </p>
+          </div>
+          <div className="projects-grid">
+            {projects.map((p) => (
+              <article className="project" key={p.id}>
+                <ProjectVisual id={p.id} />
+                <div className="project-body">
+                  <div className="project-type">{p.type}</div>
+                  <h3>{p.title}</h3>
+                  <p>{p.subtitle}</p>
+                  <div className="tags">
+                    {p.tags.map((t) => (
+                      <span key={t}>{t}</span>
+                    ))}
+                  </div>
+                  <details>
+                    <summary>
+                      Inside the project <span aria-hidden="true">+</span>
+                    </summary>
+                    <dl>
+                      <dt>THE GOAL</dt>
+                      <dd>{p.goal}</dd>
+                      <dt>MY CONTRIBUTION</dt>
+                      <dd>{p.contribution}</dd>
+                      <dt>VERIFICATION STATUS</dt>
+                      <dd>{p.verification}</dd>
+                    </dl>
+                  </details>
+                  {profile.projects[p.id] && (
+                    <a className="project-source" href={profile.projects[p.id]}>
+                      View project <Arrow />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="privacy-note">
+            ◇ &nbsp; Professional work, shared with care. Internal URLs, logs,
+            credentials, and client data stay private.
           </p>
+        </section>
+        <section className="process-section" id="process">
+          <div className="section wrap">
+            <div className="section-heading">
+              <div>
+                <div className="eyebrow">03 / THE DEBUGGING PROCESS</div>
+                <h2>
+                  Find the cause.
+                  <br />
+                  Fix the right thing.
+                </h2>
+              </div>
+              <p>
+                No guesswork dressed up as a solution.
+                <br />
+                Here’s how I approach your bug.
+              </p>
+            </div>
+            <ol className="process-grid">
+              {[
+                [
+                  "Reproduce the issue",
+                  "Understand what should happen, what actually happens, and the steps that trigger the problem.",
+                ],
+                [
+                  "Trace the root cause",
+                  "Follow the request through code, configuration, and data to find where the behavior breaks.",
+                ],
+                [
+                  "Implement the fix",
+                  "Make a focused change that addresses the cause and fits the existing application.",
+                ],
+                [
+                  "Verify the workflow",
+                  "Repeat the original steps and check the affected workflow for expected behavior.",
+                ],
+              ].map(([title, text], i) => (
+                <li key={title}>
+                  <span className="step-number">0{i + 1}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+        <section className="about section wrap">
+          <div>
+            <div className="eyebrow">THE DEVELOPER BEHIND THE FIX</div>
+            <h2>
+              Hi, I’m Abdulrhman<span className="accent">.</span>
+            </h2>
+            <p>
+              I’m a backend developer based in Amman, Jordan. Laravel is where I
+              have my strongest professional experience, with practical Django
+              experience through my bootcamp capstone.
+            </p>
+            <p>
+              I focus on understanding existing code, following the problem to
+              its source, and making the affected workflow work as intended.
+            </p>
+          </div>
+          <aside>
+            <span className="mono">ALSO IN MY TOOLKIT</span>
+            <div className="toolkit">
+              {["Filament", "Docker", "RabbitMQ", "Laravel Passport"].map(
+                (t) => (
+                  <span key={t}>{t}</span>
+                ),
+              )}
+            </div>
+            <div className="location">
+              <span className="status-dot" /> Amman, Jordan{" "}
+              <span className="mono">UTC +03:00</span>
+            </div>
+          </aside>
+        </section>
+        <section className="contact wrap" id="contact">
+          <div>
+            <div className="eyebrow">04 / LET’S GET IT WORKING</div>
+            <h2>
+              Tell me about
+              <br />
+              your bug<span className="accent">.</span>
+            </h2>
+            <p>
+              Start with what’s happening and what you expected.
+              <br />A few clear details are a good place to begin.
+            </p>
+            <div className="contact-links">
+              {profile.email && (
+                <a className="button primary" href={`mailto:${profile.email}`}>
+                  Email me <Arrow />
+                </a>
+              )}
+              {profile.upwork && (
+                <a className="button outline" href={profile.upwork}>
+                  Upwork <Arrow />
+                </a>
+              )}
+              {profile.mostaqel && (
+                <a className="button outline" href={profile.mostaqel}>
+                  Mostaqel <Arrow />
+                </a>
+              )}
+            </div>
+            {!profile.email && !profile.upwork && !profile.mostaqel && (
+              <p className="contact-pending">
+                Contact links are coming soon. Prepare a brief to share with me
+                on the platform where you found this portfolio.
+              </p>
+            )}
+          </div>
+          <div className="brief">
+            <div className="brief-title mono">
+              A GOOD BUG REPORT STARTS HERE <span>↙</span>
+            </div>
+            <pre>{brief}</pre>
+            <button className="copy-button" onClick={copyBrief}>
+              Copy bug report template <span aria-hidden="true">⧉</span>
+            </button>
+            <p role="status">{copyStatus}</p>
+            <p>
+              Keep passwords, tokens, and private client data out of your
+              initial message.
+            </p>
+          </div>
+        </section>
+      </main>
+      <footer className="footer wrap">
+        <span>© {new Date().getFullYear()} Abdulrhman Yaghi</span>
+        <span>Built with care. Debugged with patience.</span>
+        <div>
+          {profile.github && <a href={profile.github}>GitHub ↗</a>}
+          <a href="#home">Back to top ↑</a>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      </footer>
     </>
-  )
+  );
 }
-
-export default App
+export default App;
