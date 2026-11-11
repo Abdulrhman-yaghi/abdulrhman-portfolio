@@ -33,10 +33,7 @@ test("desktop: links, keyboard, controls, and accessibility", async ({
   await expect(
     page.getByRole("button", { name: "Play animation" }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page.getByRole("button", { name: "Pause stack" }).click();
-  await expect(
-    page.getByRole("button", { name: "Play stack" }),
-  ).toHaveAttribute("aria-pressed", "true");
+  await page.locator(".stack-window").hover();
   expect(
     await page
       .locator(".stack-track")
@@ -85,9 +82,7 @@ for (const width of [320, 390, 768, 1440]) {
         .locator(".stack-track")
         .evaluate((el) => getComputedStyle(el).animationName),
     ).toBe("none");
-    await expect(
-      page.getByRole("button", { name: "Pause stack" }),
-    ).toBeHidden();
+
     for (const summary of await page.locator("summary").all())
       await summary.click();
     expect(

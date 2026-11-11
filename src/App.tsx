@@ -78,7 +78,6 @@ function ProjectVisual({ id }: { id: string }) {
 }
 function App() {
   const [paused, setPaused] = useState(false);
-  const [stackPaused, setStackPaused] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
   const brief =
     "Application / website:\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
@@ -196,10 +195,15 @@ function App() {
             </div>
           </div>
         </section>
-        <div className={`skills-band ${stackPaused ? "stack-paused" : ""}`}>
+        <div className="skills-band">
           <div className="wrap skills-inner">
             <span className="mono">MY CORE STACK</span>
-            <div className="stack-window">
+            <div
+              className="stack-window"
+              tabIndex={0}
+              role="region"
+              aria-label="Core skills; hover or focus to pause scrolling"
+            >
               <div className="stack-track">
                 {[0, 1].map((copy) => (
                   <div
@@ -223,13 +227,6 @@ function App() {
                 ))}
               </div>
             </div>
-            <button
-              className="stack-toggle"
-              onClick={() => setStackPaused(!stackPaused)}
-              aria-pressed={stackPaused}
-            >
-              {stackPaused ? "Play stack" : "Pause stack"}
-            </button>
           </div>
         </div>
         <section className="section wrap" id="services">

@@ -1200,16 +1200,6 @@ dd {
   color: #5eead4;
   margin-right: 18px;
 }
-.stack-toggle {
-  background: transparent;
-  border: 1px solid #354357;
-  border-radius: 5px;
-  padding: 7px 10px;
-  color: #b6c3d5;
-  font-size: 10px;
-  flex-shrink: 0;
-}
-.stack-paused .stack-track,
 .skills-band:hover .stack-track,
 .skills-band:focus-within .stack-track {
   animation-play-state: paused;
@@ -1268,9 +1258,6 @@ dd {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .stack-toggle {
-    display: none;
-  }
   .skills-inner > .stack-window {
     mask-image: none;
   }
@@ -1286,4 +1273,9 @@ dd {
   .stack-group[aria-hidden="true"] {
     display: none;
   }
+}
+
+.stack-window:focus-visible {
+  outline: 2px solid #5eead4;
+  outline-offset: 5px;
 }
