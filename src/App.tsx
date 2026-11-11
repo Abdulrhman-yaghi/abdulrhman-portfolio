@@ -79,6 +79,15 @@ function ProjectVisual({ id }: { id: string }) {
 function App() {
   const [paused, setPaused] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
+  const [emailStatus, setEmailStatus] = useState("");
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(profile.email);
+      setEmailStatus("Email copied to clipboard.");
+    } catch {
+      setEmailStatus("Select and copy the email address above.");
+    }
+  }
   const brief =
     "Application / website:\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
   async function copyBrief() {
@@ -158,6 +167,9 @@ function App() {
                 View my work ↓
               </a>
             </div>
+            <a className="collaboration-link" href="#collaborate">
+              Hire me for a project or volunteer opportunity ↗
+            </a>
             <p className="experience">
               ⌘ &nbsp; Laravel is my strongest professional experience.
             </p>
@@ -420,6 +432,60 @@ function App() {
             </div>
           </aside>
         </section>
+        <section className="opportunities section wrap" id="collaborate">
+          <div className="section-heading">
+            <div>
+              <div className="eyebrow">LET’S BUILD SOMETHING USEFUL</div>
+              <h2>Have a project in mind?</h2>
+            </div>
+            <p>
+              A new tool, an existing application, or a cause that needs
+              technical help. Tell me what you’re trying to achieve.
+            </p>
+          </div>
+          <div className="opportunity-grid">
+            <article>
+              <span className="mono">PAID COLLABORATION</span>
+              <h3>Hire me for a project</h3>
+              <p>
+                Tell me what you need built or improved, your timeline, and your
+                budget if you have one. We can discuss the scope and whether I’m
+                a good fit.
+              </p>
+              <a
+                className="button primary"
+                href={generalGmail}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Discuss a project via Gmail <Arrow />
+              </a>
+              <a className="text-link" href={generalEmail}>
+                Discuss a project in my email app ↗
+              </a>
+            </article>
+            <article>
+              <span className="mono">COMMUNITY & VOLUNTEERING</span>
+              <h3>Invite me to a volunteer project</h3>
+              <p>
+                Working on something that helps others? Share the mission, the
+                help you need, and the expected time commitment so we can
+                explore a fit.
+              </p>
+              <a
+                className="button outline"
+                href={generalGmail}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Share an opportunity via Gmail <Arrow />
+              </a>
+              <a className="text-link" href={generalEmail}>
+                Share an opportunity in my email app ↗
+              </a>
+            </article>
+          </div>
+        </section>
         <section className="contact wrap" id="contact">
           <div>
             <div className="eyebrow">04 / LET’S GET IT WORKING</div>
@@ -440,6 +506,12 @@ function App() {
                   <a className="email-address" href={generalEmail}>
                     {profile.email}
                   </a>
+                  <button className="email-copy" onClick={copyEmail}>
+                    Copy email
+                  </button>
+                  <p role="status" aria-label="Email copy status">
+                    {emailStatus}
+                  </p>
                   <div className="email-actions">
                     <a
                       className="button outline"
@@ -510,7 +582,9 @@ function App() {
             <button className="copy-button" onClick={copyBrief}>
               Copy bug report template <span aria-hidden="true">⧉</span>
             </button>
-            <p role="status">{copyStatus}</p>
+            <p role="status" aria-label="Template copy status">
+              {copyStatus}
+            </p>
             <p>
               Keep passwords, tokens, and private client data out of your
               initial message.

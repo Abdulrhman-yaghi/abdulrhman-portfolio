@@ -22,9 +22,9 @@ test("desktop: links, keyboard, controls, and accessibility", async ({
   await page.getByRole("link", { name: "Tell me about your bug" }).click();
   await expect(page).toHaveURL(/#contact$/);
   await page.getByRole("button", { name: "Copy bug report template" }).click();
-  await expect(page.getByRole("status")).toHaveText(
-    "Template copied to clipboard.",
-  );
+  await expect(
+    page.getByRole("status", { name: "Template copy status" }),
+  ).toHaveText("Template copied to clipboard.");
   expect(await page.evaluate(() => navigator.clipboard.readText())).toContain(
     "Steps to reproduce:",
   );
@@ -141,4 +141,30 @@ test("email choices keep general messages blank and prefill only bug reports", a
   await expect(
     page.getByRole("link", { name: "Connect on LinkedIn" }),
   ).toHaveAttribute("href", "https://www.linkedin.com/in/abdalrhman-yaghi/");
+});
+
+test("copy email and reach paid or volunteer contact without a bug template", async ({
+  page,
+  context,
+}) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/");
+  await page.getByRole("button", { name: "Copy email", exact: true }).click();
+  await expect(
+    page.getByRole("status", { name: "Email copy status" }),
+  ).toHaveText("Email copied to clipboard.");
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
+    "ayaghi.2004@gmail.com",
+  );
+  for (const name of [
+    "Discuss a project via Gmail",
+    "Share an opportunity via Gmail",
+  ]) {
+    const url = new URL(
+      (await page.getByRole("link", { name }).getAttribute("href"))!,
+    );
+    expect(url.searchParams.get("to")).toBe("ayaghi.2004@gmail.com");
+    expect(url.searchParams.has("body")).toBe(false);
+    expect(url.searchParams.has("su")).toBe(false);
+  }
 });

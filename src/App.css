@@ -1308,3 +1308,66 @@ dd {
 .contact .brief .email-actions .text-link {
   font-size: 11px;
 }
+.collaboration-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #5eead4;
+  font-size: 12px;
+}
+.email-copy {
+  margin: 10px 0 0 12px;
+  background: #1b303b;
+  color: #91eddb;
+  border: 1px solid #41616a;
+  border-radius: 4px;
+  padding: 7px 11px;
+  font-size: 11px;
+}
+.email-option p:empty {
+  display: none;
+}
+.opportunities {
+  padding-top: 0;
+}
+.opportunity-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+.opportunity-grid article {
+  padding: 30px;
+  background: #101b2a;
+  border: 1px solid #29374b;
+  border-radius: 8px;
+}
+.opportunity-grid .mono {
+  color: #5eead4;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+.opportunity-grid h3 {
+  font-size: 23px;
+  margin-top: 15px;
+}
+.opportunity-grid p {
+  font-size: 13px;
+  color: #afbdd0;
+  line-height: 1.9;
+  margin: 16px 0 24px;
+}
+.opportunity-grid .text-link {
+  display: block;
+  margin-top: 16px;
+}
+@media (max-width: 760px) {
+  .opportunity-grid {
+    grid-template-columns: 1fr;
+  }
+  .opportunity-grid article {
+    padding: 24px;
+  }
+  .email-copy {
+    margin-left: 0;
+    display: block;
+  }
+}
