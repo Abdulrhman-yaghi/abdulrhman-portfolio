@@ -1,32 +1,41 @@
-# React + TypeScript + Vite
+# Abdulrhman Yaghi — backend portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Responsive React + TypeScript + Vite portfolio focused on Laravel and Django bug fixes. Fonts are self-hosted. The original AY SVG is both the logo and favicon. The CSS 3D request trace needs no WebGL, has a pause control, and becomes static under reduced motion.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Production
+
+```sh
+npm run build
+npm run preview
+```
+
+Deploy the generated `dist/` directory to a static host. For subdirectory hosting, set Vite's `base` to that path before building.
+
+## Public links
+
+Edit **src/config.ts** for email, GitHub, Upwork, Mostaqel, and per-project URLs. Empty values are hidden. There is no message submission backend. The main CTA leads to the contact section, where visitors can copy a bug report template. Until contact links are supplied, the page clearly explains this limitation.
+
+## Before publishing
+
+- Supply the email or preferred contact channel, Upwork and Mostaqel profile URLs, and optional GitHub/project URLs.
+- Confirm permission to name VKHBP publicly and share the described contributions.
+- Supply specific project outcomes and verification evidence. The current case studies explicitly state evidence limitations rather than claim unverified results.
+- For the Tasks API DELETE example, provide the original route, reproduction steps, root cause, change, and verification result. No resolution is invented in this version.
+
+Project diagrams are original illustrations, not screenshots of production systems. They contain no client data, internal endpoints, logs, or credentials.
+
+## Checks
+
+```sh
+npx playwright install chromium
+npx playwright test
+```
+
+The browser suite checks 320, 390, 768, and 1440px layouts, horizontal overflow, reduced motion, keyboard access, links, case-study disclosure controls, clipboard behavior, runtime errors, and axe WCAG A/AA checks including contrast. Screenshots are generated in `qa/` and excluded from Git. Automated accessibility testing does not replace a screen-reader review.
