@@ -1279,3 +1279,32 @@ dd {
   outline: 2px solid #5eead4;
   outline-offset: 5px;
 }
+.email-option {
+  width: 100%;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #365458;
+  margin-bottom: 8px;
+}
+.email-option p {
+  font-size: 12px;
+  color: #b4c4d4;
+  margin: 8px 0 14px;
+}
+.email-address {
+  color: #5eead4;
+  font-size: 15px;
+  overflow-wrap: anywhere;
+}
+.email-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 18px;
+}
+.report-actions {
+  margin-bottom: 20px;
+}
+.contact .brief .email-actions .text-link {
+  font-size: 11px;
+}

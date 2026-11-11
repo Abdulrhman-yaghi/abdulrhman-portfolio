@@ -104,3 +104,41 @@ for (const width of [320, 390, 768, 1440]) {
     await page.screenshot({ path: `qa/layout-${width}.png`, fullPage: true });
   });
 }
+
+test("email choices keep general messages blank and prefill only bug reports", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const generalGmail = new URL(
+    (await page
+      .getByRole("link", { name: "Contact via Gmail", exact: true })
+      .getAttribute("href"))!,
+  );
+  expect(generalGmail.hostname).toBe("mail.google.com");
+  expect(generalGmail.searchParams.get("to")).toBe("ayaghi.2004@gmail.com");
+  expect(generalGmail.searchParams.has("su")).toBe(false);
+  expect(generalGmail.searchParams.has("body")).toBe(false);
+  await expect(
+    page.getByRole("link", { name: "Use my email app", exact: false }),
+  ).toHaveAttribute("href", "mailto:ayaghi.2004@gmail.com");
+  const template = await page.locator(".brief pre").innerText();
+  const bugGmail = new URL(
+    (await page
+      .getByRole("link", { name: "Report a bug via Gmail" })
+      .getAttribute("href"))!,
+  );
+  expect(bugGmail.searchParams.get("to")).toBe("ayaghi.2004@gmail.com");
+  expect(bugGmail.searchParams.get("su")).toBe("Bug report");
+  expect(bugGmail.searchParams.get("body")).toBe(template);
+  const bugMail = new URL(
+    (await page
+      .getByRole("link", { name: "Report via my email app" })
+      .getAttribute("href"))!,
+  );
+  expect(bugMail.protocol).toBe("mailto:");
+  expect(bugMail.pathname).toBe("ayaghi.2004@gmail.com");
+  expect(bugMail.searchParams.get("body")).toBe(template);
+  await expect(
+    page.getByRole("link", { name: "Connect on LinkedIn" }),
+  ).toHaveAttribute("href", "https://www.linkedin.com/in/abdalrhman-yaghi/");
+});

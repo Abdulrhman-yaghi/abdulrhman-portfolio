@@ -89,9 +89,21 @@ function App() {
       setCopyStatus("Select and copy the template above.");
     }
   }
-  const contactHref = profile.email
-    ? `mailto:${profile.email}?subject=${encodeURIComponent("Help with a bug")}&body=${encodeURIComponent("Hi Abdulrhman, here’s what stopped working:\n\n")}`
-    : profile.upwork || profile.mostaqel || "#contact";
+  const contactHref = "#contact";
+  const generalEmail = `mailto:${profile.email}`;
+  const bugEmail = `${generalEmail}?subject=${encodeURIComponent("Bug report")}&body=${encodeURIComponent(brief)}`;
+  const gmailBase = "https://mail.google.com/mail/?";
+  const generalGmail =
+    gmailBase + new URLSearchParams({ view: "cm", fs: "1", to: profile.email });
+  const bugGmail =
+    gmailBase +
+    new URLSearchParams({
+      view: "cm",
+      fs: "1",
+      to: profile.email,
+      su: "Bug report",
+      body: brief,
+    });
   return (
     <>
       <a className="skip-link" href="#main">
@@ -422,8 +434,35 @@ function App() {
             </p>
             <div className="contact-links">
               {profile.email && (
-                <a className="button primary" href={`mailto:${profile.email}`}>
-                  Email me about a bug <Arrow />
+                <div className="email-option">
+                  <h3>Just want to get in touch?</h3>
+                  <p>Start a conversation with a blank message.</p>
+                  <a className="email-address" href={generalEmail}>
+                    {profile.email}
+                  </a>
+                  <div className="email-actions">
+                    <a
+                      className="button outline"
+                      href={generalGmail}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Contact via Gmail <Arrow />
+                    </a>
+                    <a className="text-link" href={generalEmail}>
+                      Use my email app ↗
+                    </a>
+                  </div>
+                </div>
+              )}
+              {profile.linkedin && (
+                <a
+                  className="button outline"
+                  href={profile.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Connect on LinkedIn <Arrow />
                 </a>
               )}
               {profile.upwork && (
@@ -446,9 +485,28 @@ function App() {
           </div>
           <div className="brief">
             <div className="brief-title mono">
-              NOT SURE WHAT TO SAY? <span>↙</span>
+              REPORT A BUG <span>↙</span>
             </div>
+            <p>
+              Open a draft with this template already filled in. Add your
+              details, then send it when you’re ready.
+            </p>
             <pre>{brief}</pre>
+            {profile.email && (
+              <div className="email-actions report-actions">
+                <a
+                  className="button primary"
+                  href={bugGmail}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Report a bug via Gmail <Arrow />
+                </a>
+                <a className="text-link" href={bugEmail}>
+                  Report via my email app ↗
+                </a>
+              </div>
+            )}
             <button className="copy-button" onClick={copyBrief}>
               Copy bug report template <span aria-hidden="true">⧉</span>
             </button>
@@ -467,6 +525,15 @@ function App() {
         <span>© {new Date().getFullYear()} Abdulrhman Yaghi</span>
         <span>Built with care. Debugged with patience.</span>
         <div>
+          {profile.linkedin && (
+            <a
+              href={profile.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn ↗
+            </a>
+          )}
           {profile.github && <a href={profile.github}>GitHub ↗</a>}
           <a href="#home">Back to top ↑</a>
         </div>

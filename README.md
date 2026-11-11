@@ -20,11 +20,11 @@ Deploy the generated `dist/` directory to a static host. For subdirectory hostin
 
 ## Public links
 
-Edit **src/config.ts** for email, GitHub, Upwork, Mostaqel, and per-project URLs. Empty values are hidden. There is no message submission backend. The main CTA leads to the contact section, where visitors can copy a bug report template. Until contact links are supplied, the page clearly explains this limitation.
+Edit **src/config.ts** for email, LinkedIn, GitHub, Upwork, Mostaqel, and per-project URLs. Empty values are hidden. There is no message submission backend. The main CTA leads to two contact choices: a blank general message or a bug report prefilled with the displayed template. Both support Gmail compose and the default email app. Drafts are not sent automatically. LinkedIn is also available.
 
 ## Before publishing
 
-- Supply the email or preferred contact channel, Upwork and Mostaqel profile URLs, and optional GitHub/project URLs.
+- Optionally supply Upwork, Mostaqel, GitHub, and project URLs. Email and LinkedIn are configured.
 - Supply specific project outcomes and verification evidence. The current case studies explicitly state evidence limitations rather than claim unverified results.
 - For the Tasks API DELETE example, provide the original route, reproduction steps, root cause, change, and verification result. No resolution is invented in this version.
 
