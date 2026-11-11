@@ -4,5 +4,5 @@ export const profile = {
   github: "",
   upwork: "",
   mostaqel: "",
-  projects: { vkhbp: "", dishly: "", tasks: "" },
+  projects: { dishly: "", tasks: "" },
 };

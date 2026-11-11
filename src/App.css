@@ -446,7 +446,7 @@ h3 {
 }
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 22px;
   align-items: start;
 }
@@ -1161,6 +1161,129 @@ dd {
     border-color: #5eead4;
   }
   .art-footer button {
+    display: none;
+  }
+}
+/* Continuous stack ribbon; duplicated content is hidden from assistive technology. */
+.skills-inner > .stack-window {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  margin: 0;
+  flex: 1;
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 4%,
+    black 96%,
+    transparent
+  );
+}
+.stack-track {
+  display: flex;
+  width: max-content;
+  animation: stack-scroll 30s linear infinite;
+}
+.stack-group {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  padding-right: 48px;
+  flex-shrink: 0;
+}
+.stack-group span {
+  white-space: nowrap;
+  font-size: 13px;
+}
+.stack-group span::before {
+  content: "·";
+  color: #5eead4;
+  margin-right: 18px;
+}
+.stack-toggle {
+  background: transparent;
+  border: 1px solid #354357;
+  border-radius: 5px;
+  padding: 7px 10px;
+  color: #b6c3d5;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.stack-paused .stack-track,
+.skills-band:hover .stack-track,
+.skills-band:focus-within .stack-track {
+  animation-play-state: paused;
+}
+@keyframes stack-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.quick-contact {
+  position: fixed;
+  right: 24px;
+  bottom: 22px;
+  z-index: 20;
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  background: #5eead4;
+  color: #0b1220;
+  padding: 13px 19px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: 0 6px 25px #0006;
+}
+.quick-contact:hover {
+  background: #9cf5e6;
+}
+.footer {
+  padding-bottom: 90px;
+}
+.contact-links .button {
+  min-height: 48px;
+}
+@media (max-width: 760px) {
+  .skills-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .skills-inner > .mono {
+    flex: 1;
+  }
+  .skills-inner > .stack-window {
+    order: 3;
+    flex-basis: 100%;
+  }
+  .quick-contact {
+    right: 16px;
+    bottom: 16px;
+    padding: 12px 17px;
+  }
+  .stack-group {
+    gap: 30px;
+    padding-right: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .stack-toggle {
+    display: none;
+  }
+  .skills-inner > .stack-window {
+    mask-image: none;
+  }
+  .stack-track {
+    width: 100%;
+    transform: none;
+  }
+  .stack-group {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0;
+  }
+  .stack-group[aria-hidden="true"] {
     display: none;
   }
 }

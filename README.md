@@ -1,6 +1,6 @@
 # Abdulrhman Yaghi — backend portfolio
 
-Responsive React + TypeScript + Vite portfolio focused on Laravel and Django bug fixes. Fonts are self-hosted. The original AY SVG is both the logo and favicon. The CSS 3D request trace needs no WebGL, has a pause control, and becomes static under reduced motion.
+Responsive React + TypeScript + Vite portfolio focused on application bug fixes. Fonts are self-hosted. The original AY SVG is both the logo and favicon. The CSS 3D request trace needs no WebGL, has a pause control, and becomes static under reduced motion.
 
 ## Run locally
 
@@ -25,7 +25,6 @@ Edit **src/config.ts** for email, GitHub, Upwork, Mostaqel, and per-project URLs
 ## Before publishing
 
 - Supply the email or preferred contact channel, Upwork and Mostaqel profile URLs, and optional GitHub/project URLs.
-- Confirm permission to name VKHBP publicly and share the described contributions.
 - Supply specific project outcomes and verification evidence. The current case studies explicitly state evidence limitations rather than claim unverified results.
 - For the Tasks API DELETE example, provide the original route, reproduction steps, root cause, change, and verification result. No resolution is invented in this version.
 

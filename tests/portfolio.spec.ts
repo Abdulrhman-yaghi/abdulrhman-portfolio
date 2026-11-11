@@ -33,11 +33,22 @@ test("desktop: links, keyboard, controls, and accessibility", async ({
   await expect(
     page.getByRole("button", { name: "Play animation" }),
   ).toHaveAttribute("aria-pressed", "true");
+  await page.getByRole("button", { name: "Pause stack" }).click();
+  await expect(
+    page.getByRole("button", { name: "Play stack" }),
+  ).toHaveAttribute("aria-pressed", "true");
+  expect(
+    await page
+      .locator(".stack-track")
+      .evaluate((el) => getComputedStyle(el).animationPlayState),
+  ).toBe("paused");
+  await page.getByRole("link", { name: "Have a bug? Let’s talk" }).click();
+  await expect(page).toHaveURL(/#contact$/);
   for (const summary of await page.locator("summary").all()) {
     await summary.focus();
     await page.keyboard.press("Enter");
   }
-  await expect(page.locator("details[open]")).toHaveCount(3);
+  await expect(page.locator("details[open]")).toHaveCount(2);
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();
@@ -69,6 +80,14 @@ for (const width of [320, 390, 768, 1440]) {
       page.getByRole("button", { name: "Pause animation" }),
     ).toBeHidden();
     await expect(page.locator("h1")).toBeVisible();
+    expect(
+      await page
+        .locator(".stack-track")
+        .evaluate((el) => getComputedStyle(el).animationName),
+    ).toBe("none");
+    await expect(
+      page.getByRole("button", { name: "Pause stack" }),
+    ).toBeHidden();
     for (const summary of await page.locator("summary").all())
       await summary.click();
     expect(

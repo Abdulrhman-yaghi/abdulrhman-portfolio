@@ -4,18 +4,6 @@ import "./App.css";
 const Arrow = () => <span aria-hidden="true">↗</span>;
 const projects = [
   {
-    id: "vkhbp",
-    title: "VKHBP Admin Web",
-    type: "PROFESSIONAL · LARAVEL",
-    subtitle: "Backend work behind everyday operations.",
-    goal: "Support the backend workflows of an admin application.",
-    contribution:
-      "Contributed to the virtual office catalog, workshop reminders, and authentication workflows.",
-    verification:
-      "The scope shown here reflects my backend contributions. Specific fixes and verification results require supporting evidence and permission before publication.",
-    tags: ["Laravel", "Backend workflows", "Authentication"],
-  },
-  {
     id: "dishly",
     title: "Dishly",
     type: "BOOTCAMP CAPSTONE · DJANGO",
@@ -47,26 +35,10 @@ function ProjectVisual({ id }: { id: string }) {
       aria-label="Illustrative architecture diagram"
     >
       <div className="diagram-label">
-        <span>
-          {id === "vkhbp"
-            ? "WORKFLOW MAP"
-            : id === "dishly"
-              ? "RELATIONSHIP MAP"
-              : "REQUEST TRACE"}
-        </span>
+        <span>{id === "dishly" ? "RELATIONSHIP MAP" : "REQUEST TRACE"}</span>
         <span>ILLUSTRATIVE</span>
       </div>
-      {id === "vkhbp" ? (
-        <div className="workflow">
-          <div className="mini-node">Admin application</div>
-          <div className="branch-line" />
-          <div className="node-row">
-            <span>Office catalog</span>
-            <span>Reminders</span>
-            <span>Authentication</span>
-          </div>
-        </div>
-      ) : id === "dishly" ? (
+      {id === "dishly" ? (
         <div className="schema">
           <div>
             <b>recipes</b>
@@ -106,9 +78,10 @@ function ProjectVisual({ id }: { id: string }) {
 }
 function App() {
   const [paused, setPaused] = useState(false);
+  const [stackPaused, setStackPaused] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
   const brief =
-    "Application: Laravel / Django\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
+    "Application / website:\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
   async function copyBrief() {
     try {
       await navigator.clipboard.writeText(brief);
@@ -117,6 +90,9 @@ function App() {
       setCopyStatus("Select and copy the template above.");
     }
   }
+  const contactHref = profile.email
+    ? `mailto:${profile.email}?subject=${encodeURIComponent("Help with a bug")}&body=${encodeURIComponent("Hi Abdulrhman, here’s what stopped working:\n\n")}`
+    : profile.upwork || profile.mostaqel || "#contact";
   return (
     <>
       <a className="skip-link" href="#main">
@@ -150,11 +126,11 @@ function App() {
               <span className="status-dot" /> BACKEND DEVELOPER · AMMAN, JORDAN
             </div>
             <h1>
-              I fix bugs in
+              I fix bugs.
               <br />
-              <span>Laravel</span> and
+              <span>You get back</span>
               <br />
-              <span>Django</span> applications<span>.</span>
+              to building<span>.</span>
             </h1>
             <p className="hero-description">
               Broken APIs. Database errors. Login issues.
@@ -164,7 +140,7 @@ function App() {
               again.
             </p>
             <div className="actions">
-              <a className="button primary" href="#contact">
+              <a className="button primary" href={contactHref}>
                 Tell me about your bug <Arrow />
               </a>
               <a className="text-link" href="#work">
@@ -220,23 +196,40 @@ function App() {
             </div>
           </div>
         </section>
-        <div className="skills-band">
+        <div className={`skills-band ${stackPaused ? "stack-paused" : ""}`}>
           <div className="wrap skills-inner">
             <span className="mono">MY CORE STACK</span>
-            <div>
-              {[
-                "PHP",
-                "Laravel",
-                "Python",
-                "Django",
-                "REST APIs",
-                "SQL",
-                "PostgreSQL",
-                "Git",
-              ].map((s) => (
-                <span key={s}>{s}</span>
-              ))}
+            <div className="stack-window">
+              <div className="stack-track">
+                {[0, 1].map((copy) => (
+                  <div
+                    className="stack-group"
+                    key={copy}
+                    aria-hidden={copy === 1 ? true : undefined}
+                  >
+                    {[
+                      "PHP",
+                      "Laravel",
+                      "Python",
+                      "Django",
+                      "REST APIs",
+                      "SQL",
+                      "PostgreSQL",
+                      "Git",
+                    ].map((skill) => (
+                      <span key={skill}>{skill}</span>
+                    ))}
+                  </div>
+                ))}
+              </div>
             </div>
+            <button
+              className="stack-toggle"
+              onClick={() => setStackPaused(!stackPaused)}
+              aria-pressed={stackPaused}
+            >
+              {stackPaused ? "Play stack" : "Pause stack"}
+            </button>
           </div>
         </div>
         <section className="section wrap" id="services">
@@ -260,7 +253,7 @@ function App() {
             {[
               [
                 "{ }",
-                "Laravel & Django bug fixes",
+                "Application bug fixes",
                 "Unexpected errors or a feature that stopped working? I reproduce the issue and trace it through your application.",
               ],
               [
@@ -276,7 +269,7 @@ function App() {
               [
                 "⌁",
                 "Queues & deployments",
-                "Laravel jobs that fail, reminders that don’t run, and configuration issues that appear during deployment.",
+                "Background jobs that fail, reminders that don’t run, and configuration issues that appear during deployment.",
               ],
             ].map(([icon, title, text], i) => (
               <article className="service" key={title}>
@@ -297,7 +290,7 @@ function App() {
               <h2>Behind the endpoints.</h2>
             </div>
             <p>
-              Professional Laravel contributions.
+              Selected learning projects.
               <br />
               Practical Django experience.
               <br />
@@ -408,11 +401,9 @@ function App() {
           <aside>
             <span className="mono">ALSO IN MY TOOLKIT</span>
             <div className="toolkit">
-              {["Filament", "Docker", "RabbitMQ", "Laravel Passport"].map(
-                (t) => (
-                  <span key={t}>{t}</span>
-                ),
-              )}
+              {["Filament", "Docker", "Laravel Passport"].map((t) => (
+                <span key={t}>{t}</span>
+              ))}
             </div>
             <div className="location">
               <span className="status-dot" /> Amman, Jordan{" "}
@@ -429,36 +420,36 @@ function App() {
               your bug<span className="accent">.</span>
             </h2>
             <p>
-              Start with what’s happening and what you expected.
-              <br />A few clear details are a good place to begin.
+              No technical brief needed. Tell me what stopped working.
+              <br />A short message is enough to start.
             </p>
             <div className="contact-links">
               {profile.email && (
                 <a className="button primary" href={`mailto:${profile.email}`}>
-                  Email me <Arrow />
+                  Email me about a bug <Arrow />
                 </a>
               )}
               {profile.upwork && (
                 <a className="button outline" href={profile.upwork}>
-                  Upwork <Arrow />
+                  Message on Upwork <Arrow />
                 </a>
               )}
               {profile.mostaqel && (
                 <a className="button outline" href={profile.mostaqel}>
-                  Mostaqel <Arrow />
+                  Message on Mostaqel <Arrow />
                 </a>
               )}
             </div>
             {!profile.email && !profile.upwork && !profile.mostaqel && (
               <p className="contact-pending">
-                Contact links are coming soon. Prepare a brief to share with me
-                on the platform where you found this portfolio.
+                Found me on a freelance platform? Send me a message there with
+                what’s broken. Direct contact links will be added here soon.
               </p>
             )}
           </div>
           <div className="brief">
             <div className="brief-title mono">
-              A GOOD BUG REPORT STARTS HERE <span>↙</span>
+              NOT SURE WHAT TO SAY? <span>↙</span>
             </div>
             <pre>{brief}</pre>
             <button className="copy-button" onClick={copyBrief}>
@@ -472,6 +463,9 @@ function App() {
           </div>
         </section>
       </main>
+      <a className="quick-contact" href={contactHref}>
+        Have a bug? Let’s talk <Arrow />
+      </a>
       <footer className="footer wrap">
         <span>© {new Date().getFullYear()} Abdulrhman Yaghi</span>
         <span>Built with care. Debugged with patience.</span>
