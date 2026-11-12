@@ -5,5 +5,10 @@ export const profile = {
   github: "",
   upwork: "",
   mostaqel: "",
-  projects: { dishly: "", tasks: "" },
+  projects: {
+    stockroom: "https://github.com/Abdulrhman-yaghi/stockroom",
+    dishly: "",
+    tasks: "",
+  },
+  stockroomPreview: "https://abdulrhman-yaghi.github.io/stockroom/",
 };

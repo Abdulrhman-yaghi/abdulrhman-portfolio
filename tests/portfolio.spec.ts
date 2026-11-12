@@ -45,7 +45,7 @@ test("desktop: links, keyboard, controls, and accessibility", async ({
     await summary.focus();
     await page.keyboard.press("Enter");
   }
-  await expect(page.locator("details[open]")).toHaveCount(2);
+  await expect(page.locator("details[open]")).toHaveCount(3);
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
     .analyze();

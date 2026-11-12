@@ -1371,3 +1371,77 @@ dd {
     display: block;
   }
 }
+.featured-project {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+}
+.featured-project .project-body {
+  padding: 32px;
+}
+.featured-project .project-visual {
+  height: 100%;
+  min-height: 340px;
+  border-bottom: 0;
+  border-right: 1px solid #29374b;
+}
+.stockroom-preview {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.stockroom-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  object-position: top left;
+}
+.stockroom-preview > span {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #0b1220ed;
+  padding: 15px 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  color: #a7c4d5;
+  letter-spacing: 0.7px;
+}
+.project-demo {
+  margin-top: 22px;
+}
+.featured-project h3 {
+  font-size: 28px;
+}
+.featured-project .project-body > p {
+  font-size: 14px;
+}
+.featured-project .project-source {
+  display: inline-block;
+  margin-left: 16px;
+  font-size: 11px;
+}
+@media (max-width: 760px) {
+  .featured-project {
+    grid-template-columns: 1fr;
+  }
+  .featured-project .project-visual {
+    height: 260px;
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid #29374b;
+  }
+  .featured-project .project-body {
+    padding: 24px;
+  }
+  .featured-project .project-source {
+    margin-left: 0;
+    display: block;
+  }
+  .stockroom-preview img {
+    height: auto;
+  }
+}

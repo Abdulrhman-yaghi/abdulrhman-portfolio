@@ -4,6 +4,18 @@ import "./App.css";
 const Arrow = () => <span aria-hidden="true">↗</span>;
 const projects = [
   {
+    id: "stockroom",
+    title: "Stockroom",
+    type: "FEATURED PROJECT · LARAVEL & FILAMENT",
+    subtitle: "Orders, inventory, and the rules behind them.",
+    goal: "Build an operations dashboard that keeps orders and inventory consistent and makes reporting easy to follow.",
+    contribution:
+      "Built product and customer management, transactional ordering, stock adjustments, role-based permissions, activity history, and private queued CSV reports. Includes a guided preview and a recorded walkthrough.",
+    verification:
+      "20 PHP tests and four browser tests passed locally. Checks cover rollback, cancellation restoring stock once, report ownership, and two processes competing for the last unit in SQLite. The hosted preview is a guide and video; the full application runs locally.",
+    tags: ["Laravel", "Filament", "Transactions", "Queued reports"],
+  },
+  {
     id: "dishly",
     title: "Dishly",
     type: "BOOTCAMP CAPSTONE · DJANGO",
@@ -29,6 +41,17 @@ const projects = [
   },
 ] as const;
 function ProjectVisual({ id }: { id: string }) {
+  if (id === "stockroom")
+    return (
+      <div className="project-visual stockroom-preview">
+        <img
+          src={`${import.meta.env.BASE_URL}stockroom-dashboard.png`}
+          alt="Actual Stockroom dashboard with order metrics, low stock, and sales reporting"
+          loading="lazy"
+        />
+        <span>ACTUAL APPLICATION · FICTIONAL DEMO DATA</span>
+      </div>
+    );
   return (
     <div
       className="project-visual"
@@ -311,7 +334,7 @@ function App() {
               <h2>Behind the endpoints.</h2>
             </div>
             <p>
-              Selected learning projects.
+              Working applications with verifiable results.
               <br />
               Practical Django experience.
               <br />
@@ -320,7 +343,10 @@ function App() {
           </div>
           <div className="projects-grid">
             {projects.map((p) => (
-              <article className="project" key={p.id}>
+              <article
+                className={`project ${p.id === "stockroom" ? "featured-project" : ""}`}
+                key={p.id}
+              >
                 <ProjectVisual id={p.id} />
                 <div className="project-body">
                   <div className="project-type">{p.type}</div>
@@ -344,9 +370,17 @@ function App() {
                       <dd>{p.verification}</dd>
                     </dl>
                   </details>
+                  {p.id === "stockroom" && (
+                    <a
+                      className="button primary project-demo"
+                      href={profile.stockroomPreview}
+                    >
+                      Explore demo & guide <Arrow />
+                    </a>
+                  )}
                   {profile.projects[p.id] && (
                     <a className="project-source" href={profile.projects[p.id]}>
-                      View project <Arrow />
+                      View source code <Arrow />
                     </a>
                   )}
                 </div>
