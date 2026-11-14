@@ -1,6 +1,6 @@
 Accessibility & SEO check: after
 URL: http://127.0.0.1:4174
-Date: 2026-11-14T09:35:12.515Z
+Date: 2026-11-14T09:47:07.366Z
 Engine: axe-core 4.14.0, tags wcag2a/aa, wcag21a/aa, best-practice
 
 == Page: 404 (/this-page-does-not-exist) HTTP 404
@@ -20,28 +20,34 @@ Engine: axe-core 4.14.0, tags wcag2a/aa, wcag21a/aa, best-practice
      needs manual review: color-contrast(2)
 
 == Page: home (/) HTTP 200
-  title: Abdulrhman Yaghi — I Fix Bugs in Web Applications (49 chars)
-  description: Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel. (146 chars)
+  title: Abdulrhman Yaghi — I Build and Fix Web Applications (51 chars)
+  description: Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues. (154 chars)
   lang: en | canonical: https://abdulrhman-portfolio.pages.dev/ | robots: (none)
   og tags: 10 | twitter tags: 5 | JSON-LD blocks: 1
-  raw HTML (pre-JS): 14571 bytes, contains <h1>: true
+  raw HTML (pre-JS): 15935 bytes, contains <h1>: true
   images without alt: none
   headings:
-    H1 I fix bugs in web applications.
+    H1 I build and fix web applications.
     H2 How it works
-    H3 You tell me what’s broken
-    H3 I find the cause
-    H3 You get a verified fix
+    H3 You tell me what you need
+    H3 I plan it, or trace it
+    H3 You get software that works
     H2 What I can help with
-    H3 Application bug fixes
-    H3 APIs & authentication
-    H3 SQL & database issues
-    H3 Queues & deployments
+    H3 Build something new
+    H4 Web applications
+    H4 APIs & integrations
+    H4 Features for existing apps
+    H3 Fix what’s broken
+    H4 Application bug fixes
+    H4 APIs & authentication
+    H4 SQL & database issues
+    H4 Queues & deployments
     H2 Recent work
     H3 Stockroom
     H2 Hi, I’m Abdulrhman.
     H3 What I work with
     H2 What can I help with?
+    H3 Let’s talk about your project.
   -- 390px: 0 violation types | smallest text 14.1664px | overflow false | JS errors 0
      needs manual review: color-contrast(12)
   -- 768px: 0 violation types | smallest text 14.5381px | overflow false | JS errors 0

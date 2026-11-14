@@ -20,7 +20,8 @@ const Arrow = ({ dir = "→" }: { dir?: string }) => (
 );
 
 /* Simple 24px line icons, drawn for this site. */
-function Icon({ name }: { name: "bug" | "api" | "data" | "clock" | "check" }) {
+type IconName = "bug" | "api" | "data" | "clock" | "check" | "layout" | "plus";
+function Icon({ name }: { name: IconName }) {
   const paths = {
     bug: (
       <>
@@ -42,6 +43,18 @@ function Icon({ name }: { name: "bug" | "api" | "data" | "clock" | "check" }) {
       </>
     ),
     check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
+    layout: (
+      <>
+        <rect x="3" y="4.5" width="18" height="15" rx="2.5" />
+        <path d="M3 9h18M9 9v10.5" />
+      </>
+    ),
+    plus: (
+      <>
+        <rect x="3.5" y="3.5" width="17" height="17" rx="4" />
+        <path d="M12 8.5v7M8.5 12h7" />
+      </>
+    ),
   };
   return (
     <svg
@@ -62,31 +75,65 @@ function Icon({ name }: { name: "bug" | "api" | "data" | "clock" | "check" }) {
   );
 }
 
-const services = [
+const serviceGroups: {
+  id: string;
+  title: string;
+  intro: string;
+  items: { icon: IconName; title: string; text: string }[];
+}[] = [
   {
-    icon: "bug",
-    title: "Application bug fixes",
-    text: "Unexpected errors or a feature that stopped working. I reproduce the problem and trace it through the code.",
+    id: "build",
+    title: "Build something new",
+    intro: "From a first version to a working product.",
+    items: [
+      {
+        icon: "layout",
+        title: "Web applications",
+        text: "Laravel applications with clear data models, business rules, user roles, and admin dashboards, like Stockroom.",
+      },
+      {
+        icon: "api",
+        title: "APIs & integrations",
+        text: "REST APIs with validation and authentication, ready for a web or mobile front end to use.",
+      },
+      {
+        icon: "plus",
+        title: "Features for existing apps",
+        text: "New features added to an application you already have, written to fit the code that’s there.",
+      },
+    ],
   },
   {
-    icon: "api",
-    title: "APIs & authentication",
-    text: "Failed requests, validation errors, login problems, and access issues between connected systems.",
+    id: "fix",
+    title: "Fix what’s broken",
+    intro: "You don’t need to know the cause.",
+    items: [
+      {
+        icon: "bug",
+        title: "Application bug fixes",
+        text: "Unexpected errors or a feature that stopped working. I reproduce the problem and trace it through the code.",
+      },
+      {
+        icon: "api",
+        title: "APIs & authentication",
+        text: "Failed requests, validation errors, login problems, and access issues between connected systems.",
+      },
+      {
+        icon: "data",
+        title: "SQL & database issues",
+        text: "Incorrect results, failed queries, and data relationships that don’t behave as expected.",
+      },
+      {
+        icon: "clock",
+        title: "Queues & deployments",
+        text: "Laravel jobs that fail, reminders that never run, and configuration issues after a deployment.",
+      },
+    ],
   },
-  {
-    icon: "data",
-    title: "SQL & database issues",
-    text: "Incorrect results, failed queries, and data relationships that don’t behave as expected.",
-  },
-  {
-    icon: "clock",
-    title: "Queues & deployments",
-    text: "Laravel jobs that fail, reminders that never run, and configuration issues after a deployment.",
-  },
-] as const;
+];
 
 function App() {
-  const [reason, setReason] = useState<ContactReason>("bug");
+  const [reason, setReason] = useState<ContactReason>("project");
   const [brief, setBrief] = useState(template);
   const [emailStatus, setEmailStatus] = useState<"" | "copied" | "failed">("");
   const [reportStatus, setReportStatus] = useState("");
@@ -225,21 +272,25 @@ function App() {
                 <span className="dot" aria-hidden="true" />
                 Backend developer in Amman, Jordan
               </p>
-              <h1 id="hero-title">I fix bugs in web applications.</h1>
+              <h1 id="hero-title">I build and fix web applications.</h1>
               <p className="lead">
-                Broken APIs, login issues, database errors, or jobs that stop
-                running. I trace the cause and verify the fix.
+                New features, APIs, and admin dashboards, built carefully. And
+                when something stops working, I find the cause and fix it.
               </p>
               <div className="actions">
                 <a
                   className="button"
                   href="#contact"
+                  onClick={goToContact("project")}
+                >
+                  Tell me about your project <Arrow />
+                </a>
+                <a
+                  className="text-link"
+                  href="#contact"
                   onClick={goToContact("bug")}
                 >
-                  Tell me about your bug <Arrow />
-                </a>
-                <a className="text-link" href="#work">
-                  See my work <Arrow dir="↓" />
+                  Something broken? Report a bug <Arrow />
                 </a>
               </div>
               <ul className="facts" aria-label="At a glance">
@@ -256,8 +307,11 @@ function App() {
                     1
                   </span>
                   <div>
-                    <h3>You tell me what’s broken</h3>
-                    <p>No technical brief needed. A short message is enough.</p>
+                    <h3>You tell me what you need</h3>
+                    <p>
+                      A new project, a feature, or something that broke. A short
+                      message is enough.
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -265,10 +319,10 @@ function App() {
                     2
                   </span>
                   <div>
-                    <h3>I find the cause</h3>
+                    <h3>I plan it, or trace it</h3>
                     <p>
-                      I reproduce the issue, then follow the code,
-                      configuration, and data.
+                      I map out what to build, or reproduce the issue and follow
+                      the code, configuration, and data.
                     </p>
                   </div>
                 </li>
@@ -277,9 +331,10 @@ function App() {
                     3
                   </span>
                   <div>
-                    <h3>You get a verified fix</h3>
+                    <h3>You get software that works</h3>
                     <p>
-                      A focused change, checked by repeating the original steps.
+                      I test the workflow before handing it over, so you can see
+                      it working.
                     </p>
                   </div>
                 </li>
@@ -297,21 +352,35 @@ function App() {
             <div className="section-intro">
               <h2 id="services-title">What I can help with</h2>
               <p>
-                You don’t need to know the cause. Tell me what you expected to
-                happen, and what happens instead.
+                Starting something new, or stuck with something that broke?
+                Either way, tell me what you want to happen.
               </p>
             </div>
-            <ul className="services-grid">
-              {services.map((s) => (
-                <li className="card service" key={s.title}>
-                  <span className="service-icon">
-                    <Icon name={s.icon} />
-                  </span>
-                  <h3>{s.title}</h3>
-                  <p>{s.text}</p>
-                </li>
+            <div className="service-groups">
+              {serviceGroups.map((group) => (
+                <section
+                  className="card service-group"
+                  key={group.id}
+                  aria-labelledby={`${group.id}-title`}
+                >
+                  <h3 id={`${group.id}-title`}>{group.title}</h3>
+                  <p className="group-intro">{group.intro}</p>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li className="service" key={item.title}>
+                        <span className="service-icon">
+                          <Icon name={item.icon} />
+                        </span>
+                        <div>
+                          <h4>{item.title}</h4>
+                          <p>{item.text}</p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
-            </ul>
+            </div>
           </div>
         </section>
 
@@ -433,8 +502,9 @@ function App() {
                 experience from my bootcamp work.
               </p>
               <p>
-                I like understanding how an existing system works, finding the
-                cause of a problem, and making the fix easy to follow.
+                I enjoy building features that are easy to follow, understanding
+                how an existing system works, and finding the cause when
+                something breaks.
               </p>
               <a
                 className="text-link"
@@ -557,8 +627,8 @@ function App() {
                 <div className="reason-options">
                   {(
                     [
-                      ["bug", "A bug"],
                       ["project", "A project"],
+                      ["bug", "A bug"],
                       ["hello", "Something else"],
                     ] as const
                   ).map(([value, label]) => (

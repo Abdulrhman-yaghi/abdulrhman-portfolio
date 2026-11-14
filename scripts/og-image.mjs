@@ -31,7 +31,7 @@ h1 { margin-top: 22px; font-family: Fraunces; font-weight: 500; font-size: 92px;
 </style></head><body><div class="wrap">
 <div class="top">${monogram}<span>Abdulrhman Yaghi</span></div>
 <p class="kicker"><i></i>Backend developer in Amman, Jordan</p>
-<h1>I fix bugs in<br>web applications.</h1>
+<h1>I build and fix<br>web applications.</h1>
 <div class="cta">Laravel · Python · Django</div>
 </div></body></html>`;
 

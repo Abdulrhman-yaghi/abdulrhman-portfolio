@@ -1,6 +1,8 @@
 # Portfolio redesign: SEO, UI/UX, before and after
 
-This branch is built on top of `main` at `6625b54` ("Document design choices and updated contact behavior"), so it merges without conflicts. It keeps the content decisions from that commit (Stockroom as the only case study, the hero wording, the bug / project / something-else contact selector with an editable bug report) and replaces the visual design and page structure.
+This branch is built on top of `main` at `6625b54` ("Document design choices and updated contact behavior"), so it merges without conflicts. It keeps the content decisions from that commit (Stockroom as the only case study, the contact selector with an editable bug report) and replaces the visual design and page structure.
+
+**Positioning:** at your request the site presents you as someone who **builds** web applications and **fixes** them, with equal weight. The headline is "I build and fix web applications.", the hero offers "Tell me about your project" (primary) and "Something broken? Report a bug", the services are split into "Build something new" and "Fix what's broken", and "A project" is the default contact option.
 
 Three versions are compared throughout:
 
@@ -42,20 +44,20 @@ Lighthouse raw files: `baseline-lighthouse*.json`, `main-lighthouse*.json`, `aft
 
 ## 2. SEO
 
-| Check                        | Original and main                                      | New                                                                                                                                                             |
-| ---------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<html lang>`                | `en`                                                   | `en`                                                                                                                                                            |
-| Title                        | "Abdulrhman Yaghi — Application Bug Fixes" (40)        | "Abdulrhman Yaghi — I Fix Bugs in Web Applications" (49), matching the hero                                                                                     |
-| Description                  | 135 chars                                              | 146 chars: "Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel." |
-| Canonical                    | missing                                                | `https://abdulrhman-portfolio.pages.dev/` (your README confirms this is the live site)                                                                          |
-| Open Graph / Twitter         | none                                                   | 10 OG + 5 Twitter tags, `summary_large_image`                                                                                                                   |
-| Share image                  | none                                                   | `public/og-image.png`, 1200×630, in the new style (AY monogram, Fraunces headline)                                                                              |
-| Person JSON-LD               | none                                                   | name, jobTitle, url, image, address (Amman, Jordan), knowsAbout, sameAs (LinkedIn). **No email**, as you asked.                                                 |
-| `robots.txt` / `sitemap.xml` | missing (HTML served instead, which caused the SEO 92) | generated at build; allow all; sitemap lists `/`                                                                                                                |
-| 404                          | soft 404                                               | static `404.html`, HTTP 404, `noindex`, one H1, links home and to contact                                                                                       |
-| Crawlable content            | empty `<div id="root">`                                | full page prerendered at build, then hydrated                                                                                                                   |
-| Headings                     | one H1, in order                                       | one H1, H1 → H2 → H3 with no skips (enforced by a test)                                                                                                         |
-| Image alt                    | complete                                               | complete                                                                                                                                                        |
+| Check                        | Original and main                                      | New                                                                                                                                                                     |
+| ---------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<html lang>`                | `en`                                                   | `en`                                                                                                                                                                    |
+| Title                        | "Abdulrhman Yaghi — Application Bug Fixes" (40)        | "Abdulrhman Yaghi — I Build and Fix Web Applications" (51), matching the hero                                                                                           |
+| Description                  | 135 chars                                              | 154 chars: "Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues." |
+| Canonical                    | missing                                                | `https://abdulrhman-portfolio.pages.dev/` (your README confirms this is the live site)                                                                                  |
+| Open Graph / Twitter         | none                                                   | 10 OG + 5 Twitter tags, `summary_large_image`                                                                                                                           |
+| Share image                  | none                                                   | `public/og-image.png`, 1200×630, in the new style (AY monogram, Fraunces headline)                                                                                      |
+| Person JSON-LD               | none                                                   | name, jobTitle, url, image, address (Amman, Jordan), knowsAbout, sameAs (LinkedIn). **No email**, as you asked.                                                         |
+| `robots.txt` / `sitemap.xml` | missing (HTML served instead, which caused the SEO 92) | generated at build; allow all; sitemap lists `/`                                                                                                                        |
+| 404                          | soft 404                                               | static `404.html`, HTTP 404, `noindex`, one H1, links home and to contact                                                                                               |
+| Crawlable content            | empty `<div id="root">`                                | full page prerendered at build, then hydrated                                                                                                                           |
+| Headings                     | one H1, in order                                       | one H1, H1 → H2 → H3 with no skips (enforced by a test)                                                                                                                 |
+| Image alt                    | complete                                               | complete                                                                                                                                                                |
 
 - **The 404 page has no canonical, on purpose.** Error pages are `noindex`, and a canonical would contradict that.
 - **The production origin is stored once,** as `VITE_SITE_URL` in `.env`. Change one line for a custom domain.
@@ -65,13 +67,13 @@ Lighthouse raw files: `baseline-lighthouse*.json`, `main-lighthouse*.json`, `aft
 
 ### Structure: answer the visitor's questions in order
 
-| #   | Section                   | Question it answers                                                                                                                                                                                                                            | Theme |
-| --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
-| 1   | **Hero**                  | "Who is this, and can they fix my problem?" Headline, one-line description, one primary CTA, a quiet "See my work" link, three short facts, and a "How it works" card (You tell me what's broken → I find the cause → You get a verified fix). | navy  |
-| 2   | **What I can help with**  | "Do they handle my kind of problem?" Four services with simple line icons.                                                                                                                                                                     | paper |
-| 3   | **Recent work**           | "Can they show it?" Stockroom: screenshot, three outcomes, demo and source, "What I built and tested".                                                                                                                                         | navy  |
-| 4   | **Hi, I'm Abdulrhman**    | "Who will I be working with?" Two short paragraphs and skills grouped in plain words (most experience / also / tools).                                                                                                                         | paper |
-| 5   | **What can I help with?** | "How do I start?" The contact selector, one email button, LinkedIn.                                                                                                                                                                            | navy  |
+| #   | Section                   | Question it answers                                                                                                                                                                                                                                                                                                                                              | Theme |
+| --- | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----- |
+| 1   | **Hero**                  | "Who is this, and can they help me?" Headline "I build and fix web applications.", a two-sentence description, the primary CTA "Tell me about your project", a "Something broken? Report a bug" link, three short facts, and a "How it works" card (You tell me what you need → I plan it, or trace it → You get software that works).                           | navy  |
+| 2   | **What I can help with**  | "Do they do what I need?" Two groups side by side: **Build something new** (web applications, APIs & integrations, features for existing apps) and **Fix what's broken** (bug fixes, APIs & authentication, SQL & database issues, queues & deployments). The build items rest on what the site already shows: Stockroom, REST APIs, Laravel Passport, Filament. | paper |
+| 3   | **Recent work**           | "Can they show it?" Stockroom: screenshot, three outcomes, demo and source, "What I built and tested".                                                                                                                                                                                                                                                           | navy  |
+| 4   | **Hi, I'm Abdulrhman**    | "Who will I be working with?" Two short paragraphs and skills grouped in plain words (most experience / also / tools).                                                                                                                                                                                                                                           | paper |
+| 5   | **What can I help with?** | "How do I start?" The contact selector (A project, the default / A bug / Something else), one email button, LinkedIn.                                                                                                                                                                                                                                            | navy  |
 
 Removed, because they added noise without helping a visitor decide:
 
@@ -134,7 +136,7 @@ Why this palette:
 
 ## 4. Contrast: every text and button pair (new design, rendered pixels)
 
-All 85 text elements at 1440px and 82 at 390px pass WCAG AA. The lowest is **5.56:1**.
+All 93 text elements at 1440px and 90 at 390px pass WCAG AA. The lowest is **5.56:1**.
 
 | Text pair                           | Colours                                      | Ratio            | Needs |
 | ----------------------------------- | -------------------------------------------- | ---------------- | ----- |
@@ -202,7 +204,7 @@ All 85 text elements at 1440px and 82 at 390px pass WCAG AA. The lowest is **5.5
 
 ## 7. Questions
 
-1. **Positioning:** the new copy leads with bug fixing and offers projects and volunteering as a secondary path (in About and the contact selector). Is that the right balance, or should project work get equal weight?
+1. **Projects vs. bug fixes:** the site now gives both equal weight. If you'd like project work to lead even more strongly (for example, a "Recent work" section above services), that's a small reorder.
 2. **Skills grouping:** is "Most experience: Laravel, PHP, REST APIs / Also: Python, Django, SQL, PostgreSQL, Git / Tools: Filament, Docker, Laravel Passport" accurate?
 3. **Profiles:** should GitHub (`github.com/Abdulrhman-yaghi`) appear in the contact section and JSON-LD? Do you have Upwork or Mostaqel profiles to add?
 4. **Domain:** will a custom domain replace `abdulrhman-portfolio.pages.dev`? It's one line in `.env`.
