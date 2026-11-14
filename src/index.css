@@ -3,14 +3,24 @@
 @import "@fontsource/geist/latin-600.css";
 @import "@fontsource/ibm-plex-mono/latin-400.css";
 :root {
+  --page: #0b1220;
+  --surface: #142236;
+  --text: #f1f5f9;
+  --muted: #b7c2ce;
+  --accent: #91d7c9;
+  --line: #334153;
+  --control-border: #708195;
+  --focus: #fbbf24;
   font-family: Geist, Arial, sans-serif;
-  color: #f1f5f9;
-  background: #0b1220;
+  color: var(--text);
+  background: var(--page);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   font-weight: 400;
+  font-size: 16px;
   line-height: 1.6;
+  color-scheme: dark;
 }
 * {
   box-sizing: border-box;
@@ -27,19 +37,20 @@ button {
   cursor: pointer;
   color: inherit;
 }
-button:focus-visible,
-a:focus-visible,
-summary:focus-visible {
-  outline: 3px solid #fbbf24;
-  outline-offset: 6px;
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 5px;
+}
+main:focus {
+  outline: none;
 }
 ::selection {
-  background: #5eead4;
-  color: #0b1220;
+  background: var(--accent);
+  color: var(--page);
 }
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 30px;
+  scroll-padding-top: 145px;
 }
 h1,
 h2,
@@ -52,8 +63,8 @@ p {
   left: 20px;
   top: -100px;
   padding: 12px;
-  background: #5eead4;
-  color: #0b1220;
+  background: var(--accent);
+  color: var(--page);
   z-index: 100;
 }
 .skip-link:focus {

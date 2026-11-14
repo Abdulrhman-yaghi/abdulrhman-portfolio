@@ -7,8 +7,6 @@ export const profile = {
   mostaqel: "",
   projects: {
     stockroom: "https://github.com/Abdulrhman-yaghi/stockroom",
-    dishly: "",
-    tasks: "",
   },
   stockroomPreview: "https://abdulrhman-yaghi.github.io/stockroom/",
 };
