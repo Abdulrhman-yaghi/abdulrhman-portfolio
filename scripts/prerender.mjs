@@ -33,6 +33,7 @@ const person = {
     "Laravel",
     "Python",
     "Django",
+    "JavaScript",
     "REST APIs",
     "SQL",
     "PostgreSQL",

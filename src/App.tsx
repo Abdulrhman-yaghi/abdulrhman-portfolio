@@ -531,6 +531,7 @@ function App() {
                   <ul className="chips">
                     <li>Python</li>
                     <li>Django</li>
+                    <li>JavaScript</li>
                     <li>SQL</li>
                     <li>PostgreSQL</li>
                     <li>Git</li>

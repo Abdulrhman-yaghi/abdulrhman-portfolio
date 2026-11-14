@@ -204,6 +204,6 @@ All 93 text elements at 1440px and 90 at 390px pass WCAG AA. The lowest is **5.5
 ## 7. Questions
 
 1. **Projects vs. bug fixes:** the site now gives both equal weight. If you'd like project work to lead even more strongly (for example, a "Recent work" section above services), that's a small reorder.
-2. **Skills grouping:** is "Most experience: Laravel, PHP, REST APIs / Also: Python, Django, SQL, PostgreSQL, Git / Tools: Filament, Docker, Laravel Passport" accurate?
+2. **Skills grouping:** is "Most experience: Laravel, PHP, REST APIs / Also: Python, Django, JavaScript, SQL, PostgreSQL, Git / Tools: Filament, Docker, Laravel Passport" accurate?
 3. **Profiles:** should GitHub (`github.com/Abdulrhman-yaghi`) appear in the contact section and JSON-LD? Do you have Upwork or Mostaqel profiles to add?
 4. **Domain:** will a custom domain replace `abdulrhman-portfolio.pages.dev`? It's one line in `src/config.ts`.
