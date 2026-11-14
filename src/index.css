@@ -1,74 +1,224 @@
+@import "@fontsource/fraunces/latin-500.css";
 @import "@fontsource/geist/latin-400.css";
 @import "@fontsource/geist/latin-500.css";
 @import "@fontsource/geist/latin-600.css";
-@import "@fontsource/ibm-plex-mono/latin-400.css";
+
+/*
+ * Design tokens. Ratios are verified in docs/redesign/report.md.
+ *
+ * Two section themes share one accent. Navy opens and closes the page
+ * (hero, work, contact). Warm "paper" sections carry the longer reading
+ * (services, process, about), because dark text on a light background
+ * is easier to read at length.
+ * Amber is the only interactive colour: bright amber on navy, dark amber
+ * on paper. Teal is a small secondary accent and never marks a control.
+ */
 :root {
-  --page: #0b1220;
-  --surface: #142236;
-  --text: #f1f5f9;
-  --muted: #b7c2ce;
-  --accent: #91d7c9;
-  --line: #334153;
-  --control-border: #708195;
-  --focus: #fbbf24;
-  font-family: Geist, Arial, sans-serif;
-  color: var(--text);
-  background: var(--page);
+  --navy: #0b1220;
+  --navy-raised: #131d31;
+  --paper: #f7f3ec;
+  --paper-deep: #efe8dc;
+  --card: #ffffff;
+  --amber: #f2b441;
+  --amber-hover: #f7c866;
+  --amber-dark: #8a5600;
+  --amber-darker: #6e4400;
+  --teal: #5eead4;
+  --teal-dark: #0f6e64;
+
+  /* Fluid modular scale: ratio 1.2 at 390px (17px base) to 1.25 at 1440px (19px base). */
+  --step-n1: clamp(
+    0.8854rem,
+    0.8614rem + 0.0984vw,
+    0.95rem
+  ); /* 14.2px → 15.2px */
+  --step-0: clamp(
+    1.0625rem,
+    1.0161rem + 0.1905vw,
+    1.1875rem
+  ); /* 17.0px → 19.0px */
+  --step-1: clamp(
+    1.275rem,
+    1.1972rem + 0.319vw,
+    1.4844rem
+  ); /* 20.4px → 23.8px */
+  --step-2: clamp(
+    1.53rem,
+    1.4091rem + 0.496vw,
+    1.8555rem
+  ); /* 24.5px → 29.7px */
+  --step-3: clamp(
+    1.836rem,
+    1.6565rem + 0.7365vw,
+    2.3193rem
+  ); /* 29.4px → 37.1px */
+  --step-4: clamp(
+    2.2032rem,
+    1.9447rem + 1.0605vw,
+    2.8992rem
+  ); /* 35.3px → 46.4px */
+  --step-5: clamp(
+    2.6438rem,
+    2.2798rem + 1.4935vw,
+    3.624rem
+  ); /* 42.3px → 58.0px */
+
+  /* 4px spacing scale. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+
+  --radius: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+  --measure: 34em; /* ~62-72 characters of Geist prose */
+  --header-h: 4.5rem;
+  --font-sans: Geist, "Segoe UI", Arial, sans-serif;
+  --font-serif: Fraunces, Georgia, "Times New Roman", serif;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+
+  font-family: var(--font-sans);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   color-scheme: dark;
 }
+
+/* Section themes: every component reads these, so it works on either background. */
+.theme-navy,
+:root {
+  --bg: var(--navy);
+  --surface: var(--navy-raised);
+  --heading: #f5f1ea;
+  --text: #f5f1ea;
+  --soft: #b3bcc9;
+  --line: #26324a;
+  --control: #7a8aa3;
+  --link: var(--amber);
+  --link-hover: var(--amber-hover);
+  --focus: var(--amber);
+  --button-bg: var(--amber);
+  --button-bg-hover: var(--amber-hover);
+  --button-text: var(--navy);
+  --button-border: var(--amber);
+  --mark: var(--teal);
+}
+.theme-paper {
+  --bg: var(--paper);
+  --surface: var(--card);
+  --heading: var(--navy);
+  --text: #2e3748;
+  --soft: #576173;
+  --line: #e2d9ca;
+  --control: #8a8070;
+  --link: var(--amber-dark);
+  --link-hover: var(--amber-darker);
+  --focus: var(--amber-dark);
+  --button-bg: var(--amber);
+  --button-bg-hover: var(--amber-hover);
+  --button-text: var(--navy);
+  --button-border: var(--amber-dark);
+  --mark: var(--teal-dark);
+  color-scheme: light;
+}
+.theme-navy,
+.theme-paper {
+  background: var(--bg);
+  color: var(--text);
+}
+
 * {
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + var(--space-4));
+  background: var(--navy);
+}
 body {
   margin: 0;
+  background: var(--navy);
+  color: var(--text);
+  font-size: var(--step-0);
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
+}
+h1,
+h2,
+h3 {
+  color: var(--heading);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+h1,
+h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+h3,
+h4 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+img {
+  max-width: 100%;
 }
 a {
   color: inherit;
-  text-decoration: none;
+}
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
 }
 button {
-  font: inherit;
   cursor: pointer;
-  color: inherit;
 }
 :focus-visible {
   outline: 3px solid var(--focus);
-  outline-offset: 5px;
+  outline-offset: 3px;
 }
 main:focus {
   outline: none;
 }
 ::selection {
-  background: var(--accent);
-  color: var(--page);
-}
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 145px;
-}
-h1,
-h2,
-h3,
-p {
-  margin: 0;
+  background: var(--amber);
+  color: var(--navy);
 }
 .skip-link {
   position: fixed;
-  left: 20px;
+  left: var(--space-4);
   top: -100px;
-  padding: 12px;
-  background: var(--accent);
-  color: var(--page);
   z-index: 100;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-pill);
+  background: var(--amber);
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
 }
 .skip-link:focus {
-  top: 15px;
+  top: var(--space-3);
 }
 @media (prefers-reduced-motion: reduce) {
   html {

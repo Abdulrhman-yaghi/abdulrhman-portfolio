@@ -1,0 +1,343 @@
+{
+  "label": "before",
+  "base": "http://127.0.0.1:4173",
+  "date": "2026-11-12T16:27:01.063Z",
+  "pages": {
+    "404": {
+      "route": "/this-page-does-not-exist",
+      "viewports": {
+        "390": {
+          "screenshot": "before/404-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 65
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "before/404-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 64
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "before/404-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 64
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "facts": {
+        "title": "Abdulrhman Yaghi — Application Bug Fixes",
+        "lang": "en",
+        "description": "Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs.",
+        "canonical": null,
+        "robots": null,
+        "og": [],
+        "twitter": [],
+        "jsonld": [],
+        "headings": [
+          "H1 I fix bugs.You get backto building.",
+          "H2 Something’s broken.Let’s work through it.",
+          "H3 Application bug fixes",
+          "H3 APIs & authentication",
+          "H3 SQL & database problems",
+          "H3 Queues & deployments",
+          "H2 Behind the endpoints.",
+          "H3 Stockroom",
+          "H3 Dishly",
+          "H3 Laravel Tasks API",
+          "H2 Find the cause.Fix the right thing.",
+          "H3 Reproduce the issue",
+          "H3 Trace the root cause",
+          "H3 Implement the fix",
+          "H3 Verify the workflow",
+          "H2 Hi, I’m Abdulrhman.",
+          "H2 Have a project in mind?",
+          "H3 Hire me for a project",
+          "H3 Invite me to a volunteer project",
+          "H2 Tell me aboutyour bug.",
+          "H3 Just want to get in touch?"
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 6,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 735,
+        "hasH1": false,
+        "title": "Abdulrhman Yaghi — Application Bug Fixes"
+      }
+    },
+    "home": {
+      "route": "/",
+      "viewports": {
+        "390": {
+          "screenshot": "before/home-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 65
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "before/home-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 64
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "before/home-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 6,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": ".brand",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            },
+            {
+              "id": "region",
+              "impact": "moderate",
+              "help": "All page content should be contained by landmarks",
+              "nodes": [
+                {
+                  "target": ".quick-contact",
+                  "summary": "Some page content is not contained by landmarks"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 2
+            },
+            {
+              "id": "color-contrast",
+              "count": 64
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "facts": {
+        "title": "Abdulrhman Yaghi — Application Bug Fixes",
+        "lang": "en",
+        "description": "Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs.",
+        "canonical": null,
+        "robots": null,
+        "og": [],
+        "twitter": [],
+        "jsonld": [],
+        "headings": [
+          "H1 I fix bugs.You get backto building.",
+          "H2 Something’s broken.Let’s work through it.",
+          "H3 Application bug fixes",
+          "H3 APIs & authentication",
+          "H3 SQL & database problems",
+          "H3 Queues & deployments",
+          "H2 Behind the endpoints.",
+          "H3 Stockroom",
+          "H3 Dishly",
+          "H3 Laravel Tasks API",
+          "H2 Find the cause.Fix the right thing.",
+          "H3 Reproduce the issue",
+          "H3 Trace the root cause",
+          "H3 Implement the fix",
+          "H3 Verify the workflow",
+          "H2 Hi, I’m Abdulrhman.",
+          "H2 Have a project in mind?",
+          "H3 Hire me for a project",
+          "H3 Invite me to a volunteer project",
+          "H2 Tell me aboutyour bug.",
+          "H3 Just want to get in touch?"
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 6,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 735,
+        "hasH1": false,
+        "title": "Abdulrhman Yaghi — Application Bug Fixes"
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+Accessibility & SEO check: mainm
+URL: http://127.0.0.1:4175
+Date: 2026-11-14T09:21:08.656Z
+Engine: axe-core 4.14.0, tags wcag2a/aa, wcag21a/aa, best-practice
+
+== Page: 404 (/this-page-does-not-exist) HTTP 200
+  title: Abdulrhman Yaghi — Application Bug Fixes (40 chars)
+  description: Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs. (135 chars)
+  lang: en | canonical: MISSING | robots: (none)
+  og tags: 0 | twitter tags: 0 | JSON-LD blocks: 0
+  raw HTML (pre-JS): 735 bytes, contains <h1>: false
+  images without alt: none
+  headings:
+    H1 I fix bugs inweb applications.
+    H2 Follow the request.Find where it breaks.
+    H2 My core stack
+    H2 See what I build.
+    H3 Stockroom
+    H4 The goal
+    H4 My contribution
+    H4 What I verified
+    H2 Start with what’s broken.
+    H3 Application bug fixes
+    H3 APIs & authentication
+    H3 SQL & database issues
+    H3 Queues & deployments
+    H2 A clear path to a fix.
+    H3 Reproduce
+    H3 Trace
+    H3 Fix
+    H3 Verify
+    H2 Hi, I’m Abdulrhman.
+    H2 What can I help with?
+  -- 390px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(4)
+  -- 768px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(5)
+  -- 1440px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(4)
+
+== Page: home (/) HTTP 200
+  title: Abdulrhman Yaghi — Application Bug Fixes (40 chars)
+  description: Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs. (135 chars)
+  lang: en | canonical: MISSING | robots: (none)
+  og tags: 0 | twitter tags: 0 | JSON-LD blocks: 0
+  raw HTML (pre-JS): 735 bytes, contains <h1>: false
+  images without alt: none
+  headings:
+    H1 I fix bugs inweb applications.
+    H2 Follow the request.Find where it breaks.
+    H2 My core stack
+    H2 See what I build.
+    H3 Stockroom
+    H4 The goal
+    H4 My contribution
+    H4 What I verified
+    H2 Start with what’s broken.
+    H3 Application bug fixes
+    H3 APIs & authentication
+    H3 SQL & database issues
+    H3 Queues & deployments
+    H2 A clear path to a fix.
+    H3 Reproduce
+    H3 Trace
+    H3 Fix
+    H3 Verify
+    H2 Hi, I’m Abdulrhman.
+    H2 What can I help with?
+  -- 390px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(4)
+  -- 768px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(5)
+  -- 1440px: 1 violation types | smallest text 12px | overflow false | JS errors 0
+     [serious] label-content-name-mismatch: Elements must have their visible text as part of their accessible name (2 nodes)
+        a[aria-label="Report a bug via Gmail"] :: Text inside the element is not included in the accessible name
+        a[aria-label="Report via my email app"] :: Text inside the element is not included in the accessible name
+     needs manual review: aria-prohibited-attr(1), color-contrast(4)
