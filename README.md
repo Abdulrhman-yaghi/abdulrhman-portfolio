@@ -26,7 +26,7 @@ The build also:
 - preloads the two above-the-fold fonts, adds Person JSON-LD built from src/config.ts (no email), and writes `sitemap.xml` and `robots.txt`
 - emits a static, `noindex` `404.html`, which Cloudflare Pages serves with HTTP 404 for unknown paths
 
-The production origin for canonical, Open Graph, JSON-LD and sitemap URLs is `VITE_SITE_URL` in .env. `public/og-image.png` (1200×630) is regenerated with `npm run og-image`.
+The production address for canonical, Open Graph, JSON-LD and sitemap URLs is `siteUrl` in src/config.ts. `public/og-image.png` (1200×630) is regenerated with `npm run og-image`.
 
 ## Design and reading
 
