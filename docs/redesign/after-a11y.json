@@ -1,0 +1,174 @@
+{
+  "label": "after",
+  "base": "http://127.0.0.1:4174",
+  "date": "2026-11-14T09:35:12.515Z",
+  "pages": {
+    "404": {
+      "route": "/this-page-does-not-exist",
+      "viewports": {
+        "390": {
+          "screenshot": "after/404-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 14.1664,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 2
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "after/404-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 14.5381,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 2
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "after/404-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 15.1994,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 2
+            }
+          ]
+        }
+      },
+      "status": 404,
+      "facts": {
+        "title": "Page not found — Abdulrhman Yaghi",
+        "lang": "en",
+        "description": "This page does not exist. Go back to the portfolio of Abdulrhman Yaghi, backend developer in Amman, Jordan.",
+        "canonical": null,
+        "robots": "noindex",
+        "og": [],
+        "twitter": [],
+        "jsonld": [],
+        "headings": [
+          "H1 This page doesn’t exist."
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 15.1994,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 1605,
+        "hasH1": true,
+        "title": "Page not found — Abdulrhman Yaghi"
+      }
+    },
+    "home": {
+      "route": "/",
+      "viewports": {
+        "390": {
+          "screenshot": "after/home-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 14.1664,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 12
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "after/home-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 14.5381,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 12
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "after/home-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 15.1994,
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "count": 12
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "facts": {
+        "title": "Abdulrhman Yaghi — I Fix Bugs in Web Applications",
+        "lang": "en",
+        "description": "Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+        "canonical": "https://abdulrhman-portfolio.pages.dev/",
+        "robots": null,
+        "og": [
+          "og:type=website",
+          "og:site_name=Abdulrhman Yaghi",
+          "og:locale=en_US",
+          "og:url=https://abdulrhman-portfolio.pages.dev/",
+          "og:title=Abdulrhman Yaghi — I Fix Bugs in Web Applications",
+          "og:description=Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+          "og:image=https://abdulrhman-portfolio.pages.dev/og-image.png",
+          "og:image:width=1200",
+          "og:image:height=630",
+          "og:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I fix bugs in web applications."
+        ],
+        "twitter": [
+          "twitter:card=summary_large_image",
+          "twitter:title=Abdulrhman Yaghi — I Fix Bugs in Web Applications",
+          "twitter:description=Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+          "twitter:image=https://abdulrhman-portfolio.pages.dev/og-image.png",
+          "twitter:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I fix bugs in web applications."
+        ],
+        "jsonld": [
+          "{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"name\":\"Abdulrhman Yaghi\",\"jobTitle\":\"Backend Developer\",\"url\":\"https://abdulrhman-portfolio.pages.dev/\",\"image\":\"https://abdulrhman-portfolio.pages.dev/og-image.png\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Amman\",\"addressCountry\":\"Jordan\"},\"knowsAbout\":[\"PHP\",\"Laravel\",\"Python\",\"Django\",\"REST APIs\",\"SQL\",\"PostgreSQL\"],\"sameAs\":[\"https://www.linkedin.com/in/abdalrhman-yaghi/\"]}"
+        ],
+        "headings": [
+          "H1 I fix bugs in web applications.",
+          "H2 How it works",
+          "H3 You tell me what’s broken",
+          "H3 I find the cause",
+          "H3 You get a verified fix",
+          "H2 What I can help with",
+          "H3 Application bug fixes",
+          "H3 APIs & authentication",
+          "H3 SQL & database issues",
+          "H3 Queues & deployments",
+          "H2 Recent work",
+          "H3 Stockroom",
+          "H2 Hi, I’m Abdulrhman.",
+          "H3 What I work with",
+          "H2 What can I help with?"
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 15.1994,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 14571,
+        "hasH1": true,
+        "title": "Abdulrhman Yaghi — I Fix Bugs in Web Applications"
+      }
+    }
+  }
+}

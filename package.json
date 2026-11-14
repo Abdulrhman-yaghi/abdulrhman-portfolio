@@ -5,15 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && vite build --ssr src/entry-server.tsx --outDir dist-ssr && node scripts/prerender.mjs",
+    "og-image": "node scripts/og-image.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "playwright test",
     "format": "prettier --write src tests *.ts index.html README.md"
   },
   "dependencies": {
+    "@fontsource/fraunces": "^5.3.0",
     "@fontsource/geist": "^5.3.0",
-    "@fontsource/ibm-plex-mono": "^5.3.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },

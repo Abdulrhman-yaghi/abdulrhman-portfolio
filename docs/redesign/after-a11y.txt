@@ -1,0 +1,50 @@
+Accessibility & SEO check: after
+URL: http://127.0.0.1:4174
+Date: 2026-11-14T09:35:12.515Z
+Engine: axe-core 4.14.0, tags wcag2a/aa, wcag21a/aa, best-practice
+
+== Page: 404 (/this-page-does-not-exist) HTTP 404
+  title: Page not found — Abdulrhman Yaghi (33 chars)
+  description: This page does not exist. Go back to the portfolio of Abdulrhman Yaghi, backend developer in Amman, Jordan. (107 chars)
+  lang: en | canonical: MISSING | robots: noindex
+  og tags: 0 | twitter tags: 0 | JSON-LD blocks: 0
+  raw HTML (pre-JS): 1605 bytes, contains <h1>: true
+  images without alt: none
+  headings:
+    H1 This page doesn’t exist.
+  -- 390px: 0 violation types | smallest text 14.1664px | overflow false | JS errors 0
+     needs manual review: color-contrast(2)
+  -- 768px: 0 violation types | smallest text 14.5381px | overflow false | JS errors 0
+     needs manual review: color-contrast(2)
+  -- 1440px: 0 violation types | smallest text 15.1994px | overflow false | JS errors 0
+     needs manual review: color-contrast(2)
+
+== Page: home (/) HTTP 200
+  title: Abdulrhman Yaghi — I Fix Bugs in Web Applications (49 chars)
+  description: Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel. (146 chars)
+  lang: en | canonical: https://abdulrhman-portfolio.pages.dev/ | robots: (none)
+  og tags: 10 | twitter tags: 5 | JSON-LD blocks: 1
+  raw HTML (pre-JS): 14571 bytes, contains <h1>: true
+  images without alt: none
+  headings:
+    H1 I fix bugs in web applications.
+    H2 How it works
+    H3 You tell me what’s broken
+    H3 I find the cause
+    H3 You get a verified fix
+    H2 What I can help with
+    H3 Application bug fixes
+    H3 APIs & authentication
+    H3 SQL & database issues
+    H3 Queues & deployments
+    H2 Recent work
+    H3 Stockroom
+    H2 Hi, I’m Abdulrhman.
+    H3 What I work with
+    H2 What can I help with?
+  -- 390px: 0 violation types | smallest text 14.1664px | overflow false | JS errors 0
+     needs manual review: color-contrast(12)
+  -- 768px: 0 violation types | smallest text 14.5381px | overflow false | JS errors 0
+     needs manual review: color-contrast(12)
+  -- 1440px: 0 violation types | smallest text 15.1994px | overflow false | JS errors 0
+     needs manual review: color-contrast(12)

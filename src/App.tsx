@@ -1,217 +1,379 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { profile } from "./config";
 import "./App.css";
 
-const Arrow = () => <span aria-hidden="true">↗</span>;
-const skills = [
-  "PHP",
-  "Laravel",
-  "Python",
-  "Django",
-  "REST APIs",
-  "SQL",
-  "PostgreSQL",
-  "Git",
-];
+// Read once at module load; the prerendered year is corrected on hydration if it differs.
+const year = new Date().getFullYear();
 const template =
   "Application / website:\nExpected behavior:\nWhat happens instead:\nSteps to reproduce:\nRecent changes:\nDeadline:";
 type ContactReason = "bug" | "project" | "hello";
+const navItems = [
+  ["services", "Services"],
+  ["work", "Work"],
+  ["about", "About"],
+] as const;
+
+const Arrow = ({ dir = "→" }: { dir?: string }) => (
+  <span className="arrow" aria-hidden="true">
+    {dir}
+  </span>
+);
+
+/* Simple 24px line icons, drawn for this site. */
+function Icon({ name }: { name: "bug" | "api" | "data" | "clock" | "check" }) {
+  const paths = {
+    bug: (
+      <>
+        <rect x="7" y="8" width="10" height="12" rx="5" />
+        <path d="M9 8a3 3 0 0 1 6 0M12 12v8M7 13H3m18 0h-4M7.5 17.5 4 20m12.5-2.5L20 20M7.5 9.5 4.5 7m12 2.5L19.5 7" />
+      </>
+    ),
+    api: <path d="M8 7 3 12l5 5M16 7l5 5-5 5M10 12h4" />,
+    data: (
+      <>
+        <ellipse cx="12" cy="6" rx="7" ry="3" />
+        <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
+      </>
+    ),
+    clock: (
+      <>
+        <circle cx="12" cy="12" r="8.5" />
+        <path d="M12 7.5V12l3 2" />
+      </>
+    ),
+    check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
+  };
+  return (
+    <svg
+      className="icon"
+      viewBox="0 0 24 24"
+      width="24"
+      height="24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {paths[name]}
+    </svg>
+  );
+}
+
+const services = [
+  {
+    icon: "bug",
+    title: "Application bug fixes",
+    text: "Unexpected errors or a feature that stopped working. I reproduce the problem and trace it through the code.",
+  },
+  {
+    icon: "api",
+    title: "APIs & authentication",
+    text: "Failed requests, validation errors, login problems, and access issues between connected systems.",
+  },
+  {
+    icon: "data",
+    title: "SQL & database issues",
+    text: "Incorrect results, failed queries, and data relationships that don’t behave as expected.",
+  },
+  {
+    icon: "clock",
+    title: "Queues & deployments",
+    text: "Laravel jobs that fail, reminders that never run, and configuration issues after a deployment.",
+  },
+] as const;
 
 function App() {
-  const [paused, setPaused] = useState(false);
   const [reason, setReason] = useState<ContactReason>("bug");
   const [brief, setBrief] = useState(template);
-  const [copyStatus, setCopyStatus] = useState("");
-  const [templateStatus, setTemplateStatus] = useState("");
-  const generalEmail = `mailto:${profile.email}`;
+  const [emailStatus, setEmailStatus] = useState<"" | "copied" | "failed">("");
+  const [reportStatus, setReportStatus] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState("");
+
+  // Highlight the nav item for the section in the middle of the viewport.
+  useEffect(() => {
+    const sections = ["home", ...navItems.map(([id]) => id), "contact"]
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // The hero has no nav item, so reaching it clears the highlight.
+        for (const entry of entries)
+          if (entry.isIntersecting)
+            setActive(entry.target.id === "home" ? "" : entry.target.id);
+      },
+      { rootMargin: "-45% 0px -50% 0px" },
+    );
+    sections.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  const mailto = `mailto:${profile.email}`;
+  const isBug = reason === "bug";
+  const draftEmail = isBug
+    ? `${mailto}?${new URLSearchParams({ subject: "Bug report", body: brief })}`
+    : mailto;
   const gmailParams = new URLSearchParams({
     view: "cm",
     fs: "1",
     to: profile.email,
   });
-  if (reason === "bug") {
+  if (isBug) {
     gmailParams.set("su", "Bug report");
     gmailParams.set("body", brief);
   }
   const gmail = `https://mail.google.com/mail/?${gmailParams}`;
-  const email =
-    reason === "bug"
-      ? `${generalEmail}?${new URLSearchParams({ subject: "Bug report", body: brief })}`
-      : generalEmail;
-  async function copy(text: string, target: "email" | "template") {
-    const update = target === "email" ? setCopyStatus : setTemplateStatus;
+
+  async function copyEmail() {
     try {
-      await navigator.clipboard.writeText(text);
-      update(target === "email" ? "Email copied." : "Bug report copied.");
+      await navigator.clipboard.writeText(profile.email);
+      setEmailStatus("copied");
     } catch {
-      update("Copy wasn’t available. Select the text and copy it manually.");
+      setEmailStatus("failed");
     }
   }
+  async function copyReport() {
+    try {
+      await navigator.clipboard.writeText(brief);
+      setReportStatus("Bug report copied.");
+    } catch {
+      setReportStatus(
+        "Copy wasn’t available. Select the text and copy it manually.",
+      );
+    }
+  }
+  const goToContact = (next: ContactReason) => () => {
+    setReason(next);
+    setMenuOpen(false);
+  };
 
   return (
     <>
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className="site-header">
+      <header className="site-header theme-navy">
         <div className="wrap header-inner">
-          <a className="brand" href="#home" aria-label="Abdulrhman Yaghi home">
+          <a className="brand" href="#home">
             <img
               src={`${import.meta.env.BASE_URL}monogram.svg`}
-              width="40"
-              height="40"
+              width="36"
+              height="36"
               alt=""
             />
             <span>Abdulrhman Yaghi</span>
           </a>
-          <nav aria-label="Main navigation">
-            <a href="#work">Work</a>
-            <a href="#services">Services</a>
-            <a href="#about">About</a>
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-expanded={menuOpen}
+            aria-controls="site-nav"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span className="menu-icon" aria-hidden="true" />
+            Menu
+          </button>
+          <nav
+            id="site-nav"
+            className="site-nav"
+            aria-label="Main navigation"
+            data-open={menuOpen}
+          >
+            {navItems.map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                aria-current={active === id ? "true" : undefined}
+                onClick={() => setMenuOpen(false)}
+              >
+                {label}
+              </a>
+            ))}
             <a
               className="nav-contact"
               href="#contact"
-              onClick={() => setReason("hello")}
+              aria-current={active === "contact" ? "true" : undefined}
+              onClick={goToContact("hello")}
             >
-              Contact <Arrow />
+              Contact
             </a>
           </nav>
         </div>
       </header>
+
       <main id="main" tabIndex={-1}>
-        <section className="hero wrap" id="home" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">Backend developer · Amman, Jordan</p>
-            <h1 id="hero-title">
-              I fix bugs in
-              <br />
-              web applications.
-            </h1>
-            <p className="hero-description">
-              Broken APIs, login issues, database errors, or jobs that stop
-              running. I trace the cause and verify the fix.
-            </p>
-            <div className="actions">
-              <a
-                className="button primary"
-                href="#contact"
-                onClick={() => setReason("bug")}
-              >
-                Tell me about your bug <Arrow />
-              </a>
-              <a className="text-link" href="#work">
-                View my work <span aria-hidden="true">↓</span>
-              </a>
-            </div>
-            <p className="experience">
-              Laravel is my strongest professional experience.
-              <br />I also work with Python and Django.
-            </p>
-          </div>
-          <aside
-            className={`working-note ${paused ? "paused" : ""}`}
-            aria-label="How I approach a bug"
-          >
-            <div className="note-top">
-              <span className="mono">A closer look</span>
-            </div>
-            <h2>
-              Follow the request.
-              <br />
-              Find where it breaks.
-            </h2>
-            <div
-              className="request-flow"
-              role="img"
-              aria-label="Illustration: a request moves through the API, application logic, and database. A failed step is fixed and verified."
-            >
-              <div className="flow-track" />
-              <span className="packet" />
-              {["API", "Logic", "Database"].map((name, index) => (
-                <div className={`flow-node node-${index}`} key={name}>
-                  <span className="node-symbol" aria-hidden="true">
-                    {["→", "{ }", "≡"][index]}
-                  </span>
-                  <span>{name}</span>
-                </div>
-              ))}
-            </div>
-            <p>
-              Reproduce the issue, make a focused change, then check the
-              affected workflow.
-            </p>
-            <div className="note-footer">
-              <span>Illustrated request flow</span>
-              <button
-                type="button"
-                aria-pressed={paused}
-                onClick={() => setPaused(!paused)}
-              >
-                {paused ? "Play animation" : "Pause animation"}
-              </button>
-            </div>
-          </aside>
-        </section>
-        <section className="skills-band" aria-label="Core skills">
-          <div className="wrap skills-inner">
-            <h2>My core stack</h2>
-            <div
-              className="stack-window"
-              tabIndex={0}
-              aria-label="Core skills. Hover or focus to stop scrolling."
-            >
-              <div className="stack-track">
-                {[0, 1].map((group) => (
-                  <div
-                    className="stack-group"
-                    key={group}
-                    aria-hidden={group === 1 ? true : undefined}
-                  >
-                    {skills.map((skill) => (
-                      <span key={skill}>{skill}</span>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
         <section
-          className="section wrap work-section"
+          className="hero theme-navy"
+          id="home"
+          aria-labelledby="hero-title"
+        >
+          <div className="wrap hero-inner">
+            <div className="hero-copy">
+              <p className="kicker">
+                <span className="dot" aria-hidden="true" />
+                Backend developer in Amman, Jordan
+              </p>
+              <h1 id="hero-title">I fix bugs in web applications.</h1>
+              <p className="lead">
+                Broken APIs, login issues, database errors, or jobs that stop
+                running. I trace the cause and verify the fix.
+              </p>
+              <div className="actions">
+                <a
+                  className="button"
+                  href="#contact"
+                  onClick={goToContact("bug")}
+                >
+                  Tell me about your bug <Arrow />
+                </a>
+                <a className="text-link" href="#work">
+                  See my work <Arrow dir="↓" />
+                </a>
+              </div>
+              <ul className="facts" aria-label="At a glance">
+                <li>Strongest in Laravel</li>
+                <li>Also Python & Django</li>
+                <li>Based in Amman · UTC+3</li>
+              </ul>
+            </div>
+            <aside className="how-card" aria-labelledby="how-title">
+              <h2 id="how-title">How it works</h2>
+              <ol>
+                <li>
+                  <span className="step" aria-hidden="true">
+                    1
+                  </span>
+                  <div>
+                    <h3>You tell me what’s broken</h3>
+                    <p>No technical brief needed. A short message is enough.</p>
+                  </div>
+                </li>
+                <li>
+                  <span className="step" aria-hidden="true">
+                    2
+                  </span>
+                  <div>
+                    <h3>I find the cause</h3>
+                    <p>
+                      I reproduce the issue, then follow the code,
+                      configuration, and data.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <span className="step" aria-hidden="true">
+                    3
+                  </span>
+                  <div>
+                    <h3>You get a verified fix</h3>
+                    <p>
+                      A focused change, checked by repeating the original steps.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </aside>
+          </div>
+        </section>
+
+        <section
+          className="section theme-paper"
+          id="services"
+          aria-labelledby="services-title"
+        >
+          <div className="wrap">
+            <div className="section-intro">
+              <h2 id="services-title">What I can help with</h2>
+              <p>
+                You don’t need to know the cause. Tell me what you expected to
+                happen, and what happens instead.
+              </p>
+            </div>
+            <ul className="services-grid">
+              {services.map((s) => (
+                <li className="card service" key={s.title}>
+                  <span className="service-icon">
+                    <Icon name={s.icon} />
+                  </span>
+                  <h3>{s.title}</h3>
+                  <p>{s.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+        <section
+          className="section theme-navy"
           id="work"
           aria-labelledby="work-title"
         >
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">Selected work</p>
-              <h2 id="work-title">See what I build.</h2>
+          <div className="wrap">
+            <div className="section-intro">
+              <h2 id="work-title">Recent work</h2>
+              <p>
+                A working application, with source code and a walkthrough you
+                can explore.
+              </p>
             </div>
-            <p>
-              A working application, with source code
-              <br className="desktop-break" /> and a walkthrough you can
-              explore.
-            </p>
-          </div>
-          <article className="project">
-            <div className="project-overview">
-              <div>
+            <article className="project" aria-labelledby="stockroom-title">
+              <figure className="project-figure">
+                <img
+                  src={`${import.meta.env.BASE_URL}stockroom-dashboard.png`}
+                  width="1440"
+                  height="1241"
+                  alt="Stockroom dashboard showing sales totals, recent orders, and low-stock products"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption>
+                  The real application, with fictional demo data.
+                </figcaption>
+              </figure>
+              <div className="project-body">
                 <p className="project-type">
-                  Laravel / Filament · Personal project
+                  Personal project · Laravel & Filament
                 </p>
-                <h3>Stockroom</h3>
+                <h3 id="stockroom-title">Stockroom</h3>
                 <p className="project-description">
                   An inventory dashboard that keeps orders, stock, and sales
                   reports in sync.
                 </p>
-                <div className="actions project-actions">
+                <ul className="checklist">
+                  <li>
+                    <Icon name="check" />
+                    Orders check stock before they are confirmed.
+                  </li>
+                  <li>
+                    <Icon name="check" />
+                    Cancellations return stock exactly once.
+                  </li>
+                  <li>
+                    <Icon name="check" />
+                    Private sales reports run in the background.
+                  </li>
+                </ul>
+                <div className="actions">
                   {profile.stockroomPreview && (
                     <a
-                      className="button secondary"
+                      className="button"
                       href={profile.stockroomPreview}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Explore demo & guide <Arrow />
+                      Explore the demo <Arrow dir="↗" />
                     </a>
                   )}
                   {profile.projects.stockroom && (
@@ -221,258 +383,178 @@ function App() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Source code <Arrow />
+                      Source code <Arrow dir="↗" />
                     </a>
                   )}
                 </div>
+                <details className="project-details">
+                  <summary>
+                    What I built and tested
+                    <span className="summary-icon" aria-hidden="true" />
+                  </summary>
+                  <dl>
+                    <dt>The goal</dt>
+                    <dd>
+                      Give a small business one place to manage products,
+                      customers, orders, and inventory.
+                    </dd>
+                    <dt>What I built</dt>
+                    <dd>
+                      The dashboard, stock checks, order cancellation, role
+                      permissions, activity history, and private queued CSV
+                      reports.
+                    </dd>
+                    <dt>How I tested it</dt>
+                    <dd>
+                      20 PHP tests and four browser tests cover key workflows,
+                      permissions, report ownership, rollback, and two processes
+                      competing for the last item in SQLite. The full Laravel
+                      application runs locally; setup instructions are in the
+                      repository. The public preview includes a guide and video.
+                    </dd>
+                  </dl>
+                </details>
               </div>
-              <ul className="project-outcomes">
-                <li>Orders check stock before they are confirmed.</li>
-                <li>Cancellations return stock exactly once.</li>
-                <li>Private sales reports run in the background.</li>
-              </ul>
-            </div>
-            <figure className="project-figure">
-              <a
-                href={profile.stockroomPreview}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Explore the Stockroom dashboard demo"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}stockroom-dashboard.png`}
-                  width="1440"
-                  height="1000"
-                  alt="Stockroom dashboard showing sales totals, recent orders, and low-stock products"
-                  loading="lazy"
-                />
-              </a>
-              <figcaption>
-                <span>Actual application. Fictional demo data.</span>
-                <span>The public preview includes a guide and video.</span>
-              </figcaption>
-            </figure>
-            <details className="project-details">
-              <summary>
-                <span className="summary-label">What I built and tested</span>
-                <span aria-hidden="true" />
-              </summary>
-              <div className="case-study">
-                <div>
-                  <h4>The goal</h4>
-                  <p>
-                    Give a small business one place to manage products,
-                    customers, orders, and inventory.
-                  </p>
-                </div>
-                <div>
-                  <h4>My contribution</h4>
-                  <p>
-                    Built the dashboard, stock checks, order cancellation, role
-                    permissions, activity history, and private queued CSV
-                    reports.
-                  </p>
-                </div>
-                <div>
-                  <h4>What I verified</h4>
-                  <p>
-                    20 PHP tests and four browser tests cover key workflows,
-                    permissions, report ownership, rollback, and two processes
-                    competing for the last item in SQLite.
-                  </p>
-                  <p>
-                    The full Laravel application runs locally. Setup
-                    instructions and test details are in the repository.
-                  </p>
-                </div>
-              </div>
-            </details>
-          </article>
-        </section>
-        <section
-          className="section wrap ruled-section"
-          id="services"
-          aria-labelledby="services-title"
-        >
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">How I can help</p>
-              <h2 id="services-title">Start with what’s broken.</h2>
-            </div>
-            <p>
-              You don’t need to know the cause.
-              <br className="desktop-break" /> Tell me what you expected to
-              happen.
-            </p>
-          </div>
-          <div className="services-list">
-            {[
-              [
-                "Application bug fixes",
-                "Unexpected errors or a feature that stopped working. I reproduce the problem and trace it through the code.",
-              ],
-              [
-                "APIs & authentication",
-                "Failed requests, validation errors, login problems, and access issues between connected systems.",
-              ],
-              [
-                "SQL & database issues",
-                "Incorrect results, failed queries, and data relationships that don’t behave as expected.",
-              ],
-              [
-                "Queues & deployments",
-                "Laravel jobs that fail, reminders that never run, and configuration issues after a deployment.",
-              ],
-            ].map(([title, description], i) => (
-              <article key={title}>
-                <span className="service-number mono">0{i + 1}</span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </div>
-              </article>
-            ))}
+            </article>
           </div>
         </section>
+
         <section
-          className="process-section"
-          id="process"
-          aria-labelledby="process-title"
-        >
-          <div className="wrap section">
-            <div className="section-heading">
-              <div>
-                <p className="eyebrow">Working together</p>
-                <h2 id="process-title">A clear path to a fix.</h2>
-              </div>
-            </div>
-            <ol className="process-list">
-              {[
-                [
-                  "Reproduce",
-                  "Understand the expected behavior and the steps that trigger the issue.",
-                ],
-                [
-                  "Trace",
-                  "Follow the code, configuration, and data to find the root cause.",
-                ],
-                [
-                  "Fix",
-                  "Make a focused change that fits the existing application.",
-                ],
-                [
-                  "Verify",
-                  "Repeat the original steps and check the affected workflow.",
-                ],
-              ].map(([title, description], i) => (
-                <li key={title}>
-                  <span className="step-number mono">0{i + 1}</span>
-                  <h3>{title}</h3>
-                  <p>{description}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-        <section
-          className="section wrap about"
+          className="section theme-paper"
           id="about"
           aria-labelledby="about-title"
         >
-          <div>
-            <p className="eyebrow">A little about me</p>
-            <h2 id="about-title">Hi, I’m Abdulrhman.</h2>
-          </div>
-          <div className="about-copy">
-            <p>
-              I’m a backend developer based in Amman, Jordan. My strongest
-              professional experience is in Laravel, with practical Django
-              experience from my bootcamp work.
-            </p>
-            <p>
-              I like understanding how an existing system works, finding the
-              cause of a problem, and making the fix easy to follow.
-            </p>
-            <p className="toolkit">
-              Also worked with{" "}
-              <strong>Filament, Docker, and Laravel Passport.</strong>
-            </p>
-            <a
-              className="text-link"
-              href="#contact"
-              onClick={() => setReason("project")}
-            >
-              Hire me for a project or discuss a volunteer opportunity <Arrow />
-            </a>
+          <div className="wrap about">
+            <div className="about-copy">
+              <h2 id="about-title">Hi, I’m Abdulrhman.</h2>
+              <p>
+                I’m a backend developer based in Amman, Jordan. My strongest
+                professional experience is in Laravel, with practical Django
+                experience from my bootcamp work.
+              </p>
+              <p>
+                I like understanding how an existing system works, finding the
+                cause of a problem, and making the fix easy to follow.
+              </p>
+              <a
+                className="text-link"
+                href="#contact"
+                onClick={goToContact("project")}
+              >
+                Hire me for a project or discuss a volunteer opportunity{" "}
+                <Arrow />
+              </a>
+            </div>
+            <div className="card skills">
+              <h3>What I work with</h3>
+              <dl>
+                <dt>Most experience</dt>
+                <dd>
+                  <ul className="chips">
+                    <li>Laravel</li>
+                    <li>PHP</li>
+                    <li>REST APIs</li>
+                  </ul>
+                </dd>
+                <dt>Also</dt>
+                <dd>
+                  <ul className="chips">
+                    <li>Python</li>
+                    <li>Django</li>
+                    <li>SQL</li>
+                    <li>PostgreSQL</li>
+                    <li>Git</li>
+                  </ul>
+                </dd>
+                <dt>Tools</dt>
+                <dd>
+                  <ul className="chips">
+                    <li>Filament</li>
+                    <li>Docker</li>
+                    <li>Laravel Passport</li>
+                  </ul>
+                </dd>
+              </dl>
+            </div>
           </div>
         </section>
+
         <section
-          className="contact-section"
+          className="section theme-navy contact-section"
           id="contact"
           aria-labelledby="contact-title"
         >
-          <div className="wrap section contact-layout">
+          <div className="wrap contact">
             <div className="contact-intro">
-              <p className="eyebrow">Get in touch</p>
               <h2 id="contact-title">What can I help with?</h2>
               <p>
-                A short message is enough to start.
-                <br />
-                Tell me what you’re working on.
+                A short message is enough to start. Tell me what you’re working
+                on, and nothing is sent until you choose to send it.
               </p>
-              <div className="direct-contact">
-                <a className="email-address" href={generalEmail}>
-                  {profile.email}
-                </a>
-                <button
-                  className="copy-email"
-                  type="button"
-                  onClick={() => copy(profile.email, "email")}
-                >
-                  Copy email
-                </button>
-                <p
-                  className="copy-status"
-                  role="status"
-                  aria-label="Email copy status"
-                >
-                  {copyStatus}
-                </p>
-              </div>
-              {profile.linkedin && (
-                <a
-                  className="text-link"
-                  href={profile.linkedin}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Connect on LinkedIn <Arrow />
-                </a>
-              )}
-              <div className="profile-links">
-                {[
-                  ["Upwork", profile.upwork],
-                  ["Mostaqel", profile.mostaqel],
-                  ["GitHub", profile.github],
-                ]
-                  .filter(([, url]) => url)
-                  .map(([label, url]) => (
+              <ul className="other-ways" aria-label="Other ways to reach me">
+                {profile.linkedin && (
+                  <li>
                     <a
                       className="text-link"
-                      key={label}
-                      href={url}
+                      href={profile.linkedin}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {label} <Arrow />
+                      Message me on LinkedIn <Arrow dir="↗" />
                     </a>
+                  </li>
+                )}
+                {(
+                  [
+                    ["GitHub", profile.github],
+                    ["Upwork", profile.upwork],
+                    ["Mostaqel", profile.mostaqel],
+                  ] as const
+                )
+                  .filter(([, url]) => url)
+                  .map(([label, url]) => (
+                    <li key={label}>
+                      <a
+                        className="text-link"
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {label} <Arrow dir="↗" />
+                      </a>
+                    </li>
                   ))}
-              </div>
+                {profile.email && (
+                  <li>
+                    <button
+                      className="link-button"
+                      type="button"
+                      onClick={copyEmail}
+                    >
+                      Copy my email address
+                    </button>
+                    <p
+                      className="status"
+                      role="status"
+                      aria-label="Email copy status"
+                    >
+                      {emailStatus === "copied" && "Email address copied."}
+                      {emailStatus === "failed" && (
+                        <>
+                          Copy wasn’t available. You can write to{" "}
+                          <a href={mailto}>{profile.email}</a>.
+                        </>
+                      )}
+                    </p>
+                  </li>
+                )}
+              </ul>
             </div>
-            <div className="contact-options">
-              <fieldset className="contact-reasons">
-                <legend>I’d like to discuss</legend>
-                <div>
+
+            <div className="contact-card">
+              <fieldset className="reasons">
+                <legend>I’d like to talk about</legend>
+                <div className="reason-options">
                   {(
                     [
                       ["bug", "A bug"],
@@ -493,100 +575,101 @@ function App() {
                   ))}
                 </div>
               </fieldset>
-              <div className="contact-content">
-                {reason === "bug" ? (
-                  <>
-                    <label className="brief-label" htmlFor="bug-brief">
-                      Your bug report{" "}
-                      <span>Optional — edit it here or in your email</span>
-                    </label>
-                    <textarea
-                      id="bug-brief"
-                      value={brief}
-                      onChange={(event) => setBrief(event.target.value)}
-                      spellCheck
-                      rows={7}
-                    />
-                    <p className="helper">
-                      Leave out passwords, access tokens, and private client
-                      data.
-                    </p>
-                  </>
-                ) : (
-                  <div className="general-note">
-                    <h3>
-                      {reason === "project"
-                        ? "Let’s talk about your project."
-                        : "Start a conversation."}
-                    </h3>
-                    <p>
-                      {reason === "project"
-                        ? "Tell me what you want to build or improve, your timeline, and any budget you have in mind. Volunteer opportunities are welcome too."
-                        : "Have a question or an opportunity to share? Send me a message in your own words."}
-                    </p>
-                    <p className="helper">Your email opens as a blank draft.</p>
-                  </div>
-                )}
-                <div className="actions contact-actions">
-                  <a
-                    className="button primary"
-                    href={gmail}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={
-                      reason === "bug"
-                        ? "Report a bug via Gmail"
-                        : "Contact via Gmail"
-                    }
-                  >
-                    Open Gmail <Arrow />
-                  </a>
-                  <a
-                    className="text-link"
-                    href={email}
-                    aria-label={
-                      reason === "bug"
-                        ? "Report via my email app"
-                        : "Use my email app"
-                    }
-                  >
-                    Use my email app <Arrow />
-                  </a>
+
+              {isBug ? (
+                <div className="reason-body">
+                  <label className="brief-label" htmlFor="bug-brief">
+                    Your bug report
+                    <span>Optional. Edit it here or in your email.</span>
+                  </label>
+                  <textarea
+                    id="bug-brief"
+                    value={brief}
+                    onChange={(event) => setBrief(event.target.value)}
+                    spellCheck
+                    rows={7}
+                  />
+                  <p className="helper">
+                    Leave out passwords, access tokens, and private client data.
+                  </p>
                 </div>
-                <p className="helper draft-note">
-                  {reason === "bug"
-                    ? "Your report is added to a draft. Review it before sending."
-                    : "Nothing is sent until you choose to send it."}
-                </p>
-                {reason === "bug" && (
-                  <>
-                    <button
-                      className="copy-report"
-                      type="button"
-                      onClick={() => copy(brief, "template")}
-                    >
-                      Copy bug report instead
-                    </button>
-                    <p
-                      className="copy-status"
-                      role="status"
-                      aria-label="Template copy status"
-                    >
-                      {templateStatus}
-                    </p>
-                  </>
-                )}
+              ) : (
+                <div className="reason-body">
+                  <h3>
+                    {reason === "project"
+                      ? "Let’s talk about your project."
+                      : "Start a conversation."}
+                  </h3>
+                  <p>
+                    {reason === "project"
+                      ? "Tell me what you want to build or improve, your timeline, and any budget you have in mind. Volunteer opportunities are welcome too."
+                      : "Have a question or an opportunity to share? Send me a message in your own words."}
+                  </p>
+                </div>
+              )}
+
+              <div className="actions contact-actions">
+                <a className="button" href={draftEmail}>
+                  {isBug ? "Email this report" : "Email me"} <Arrow />
+                </a>
+                <a
+                  className="text-link"
+                  href={gmail}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Open in Gmail instead <Arrow dir="↗" />
+                </a>
               </div>
+              <p className="helper">
+                {isBug
+                  ? "Your report opens as a draft. Review it before sending."
+                  : "Your email opens as a blank draft."}
+              </p>
+              {isBug && (
+                <>
+                  <button
+                    className="link-button"
+                    type="button"
+                    onClick={copyReport}
+                  >
+                    Copy the report instead
+                  </button>
+                  <p
+                    className="status"
+                    role="status"
+                    aria-label="Report copy status"
+                  >
+                    {reportStatus}
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </section>
       </main>
-      <footer className="wrap footer">
-        <span>© {new Date().getFullYear()} Abdulrhman Yaghi</span>
-        <span>Amman, Jordan</span>
-        <a className="text-link" href="#home">
-          Back to top <span aria-hidden="true">↑</span>
-        </a>
+
+      <footer className="footer theme-navy">
+        <div className="wrap footer-inner">
+          <p suppressHydrationWarning>
+            © {year} Abdulrhman Yaghi · Amman, Jordan
+          </p>
+          <div className="footer-links">
+            {profile.linkedin && (
+              <a
+                className="text-link"
+                href={profile.linkedin}
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn <Arrow dir="↗" />
+              </a>
+            )}
+            <a className="text-link" href="#home">
+              Back to top <Arrow dir="↑" />
+            </a>
+          </div>
+        </div>
       </footer>
     </>
   );

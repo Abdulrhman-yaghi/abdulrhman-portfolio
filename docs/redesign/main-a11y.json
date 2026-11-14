@@ -1,0 +1,299 @@
+{
+  "label": "mainm",
+  "base": "http://127.0.0.1:4175",
+  "date": "2026-11-14T09:21:08.656Z",
+  "pages": {
+    "404": {
+      "route": "/this-page-does-not-exist",
+      "viewports": {
+        "390": {
+          "screenshot": "mainm/404-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 4
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "mainm/404-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 5
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "mainm/404-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 4
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "facts": {
+        "title": "Abdulrhman Yaghi — Application Bug Fixes",
+        "lang": "en",
+        "description": "Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs.",
+        "canonical": null,
+        "robots": null,
+        "og": [],
+        "twitter": [],
+        "jsonld": [],
+        "headings": [
+          "H1 I fix bugs inweb applications.",
+          "H2 Follow the request.Find where it breaks.",
+          "H2 My core stack",
+          "H2 See what I build.",
+          "H3 Stockroom",
+          "H4 The goal",
+          "H4 My contribution",
+          "H4 What I verified",
+          "H2 Start with what’s broken.",
+          "H3 Application bug fixes",
+          "H3 APIs & authentication",
+          "H3 SQL & database issues",
+          "H3 Queues & deployments",
+          "H2 A clear path to a fix.",
+          "H3 Reproduce",
+          "H3 Trace",
+          "H3 Fix",
+          "H3 Verify",
+          "H2 Hi, I’m Abdulrhman.",
+          "H2 What can I help with?"
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 12,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 735,
+        "hasH1": false,
+        "title": "Abdulrhman Yaghi — Application Bug Fixes"
+      }
+    },
+    "home": {
+      "route": "/",
+      "viewports": {
+        "390": {
+          "screenshot": "mainm/home-390.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 4
+            }
+          ]
+        },
+        "768": {
+          "screenshot": "mainm/home-768.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 5
+            }
+          ]
+        },
+        "1440": {
+          "screenshot": "mainm/home-1440.png",
+          "errors": [],
+          "overflow": false,
+          "smallestTextPx": 12,
+          "violations": [
+            {
+              "id": "label-content-name-mismatch",
+              "impact": "serious",
+              "help": "Elements must have their visible text as part of their accessible name",
+              "nodes": [
+                {
+                  "target": "a[aria-label=\"Report a bug via Gmail\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                },
+                {
+                  "target": "a[aria-label=\"Report via my email app\"]",
+                  "summary": "Text inside the element is not included in the accessible name"
+                }
+              ]
+            }
+          ],
+          "incomplete": [
+            {
+              "id": "aria-prohibited-attr",
+              "count": 1
+            },
+            {
+              "id": "color-contrast",
+              "count": 4
+            }
+          ]
+        }
+      },
+      "status": 200,
+      "facts": {
+        "title": "Abdulrhman Yaghi — Application Bug Fixes",
+        "lang": "en",
+        "description": "Abdulrhman Yaghi, backend developer in Amman, Jordan. Application bug fixes, API troubleshooting, database issues, and background jobs.",
+        "canonical": null,
+        "robots": null,
+        "og": [],
+        "twitter": [],
+        "jsonld": [],
+        "headings": [
+          "H1 I fix bugs inweb applications.",
+          "H2 Follow the request.Find where it breaks.",
+          "H2 My core stack",
+          "H2 See what I build.",
+          "H3 Stockroom",
+          "H4 The goal",
+          "H4 My contribution",
+          "H4 What I verified",
+          "H2 Start with what’s broken.",
+          "H3 Application bug fixes",
+          "H3 APIs & authentication",
+          "H3 SQL & database issues",
+          "H3 Queues & deployments",
+          "H2 A clear path to a fix.",
+          "H3 Reproduce",
+          "H3 Trace",
+          "H3 Fix",
+          "H3 Verify",
+          "H2 Hi, I’m Abdulrhman.",
+          "H2 What can I help with?"
+        ],
+        "imagesWithoutAlt": [],
+        "smallestTextPx": 12,
+        "horizontalOverflow": false,
+        "h1InInitialHtml": null
+      },
+      "rawHtml": {
+        "bytes": 735,
+        "hasH1": false,
+        "title": "Abdulrhman Yaghi — Application Bug Fixes"
+      }
+    }
+  }
+}
