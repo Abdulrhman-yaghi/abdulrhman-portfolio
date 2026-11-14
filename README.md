@@ -1,11 +1,13 @@
-# Abdulrhman Yaghi — backend portfolio
+# Abdulrhman Yaghi portfolio
 
-Responsive React + TypeScript + Vite portfolio focused on application bug fixes. Fonts are self-hosted. The original AY SVG is both the logo and favicon. The CSS 3D request trace needs no WebGL, has a pause control, and becomes static under reduced motion.
+A React, TypeScript, and Vite portfolio for backend development and application bug fixes.
 
-## Run locally
+Live website: https://abdulrhman-portfolio.pages.dev/
+
+## Local development
 
 ```sh
-npm install
+npm ci
 npm run dev
 ```
 
@@ -16,25 +18,35 @@ npm run build
 npm run preview
 ```
 
-Deploy the generated `dist/` directory to a static host. For subdirectory hosting, set Vite's `base` to that path before building.
+Cloudflare Pages deploys the main branch with framework preset None, build command npm run build, and output directory dist. The source repository remains private.
 
-## Public links
+## Design and reading
 
-Edit **src/config.ts** for email, LinkedIn, GitHub, Upwork, Mostaqel, and per-project URLs. Empty values are hidden. There is no message submission backend. The main CTA leads to two contact choices: a blank general message or a bug report prefilled with the displayed template. Both support Gmail compose and the default email app. Drafts are not sent automatically. LinkedIn is also available.
+The navy background and slate sections preserve the original identity. Off white is the main text color, lighter neutral text carries descriptions, and muted teal highlights actions. Amber is reserved for keyboard focus and the illustrated failed request. Shared color tokens are in src/index.css.
 
-## Before publishing
+Most body copy is 16 to 19 pixels with comfortable line spacing. Technical captions are secondary. The page uses simple section dividers, a real project screenshot, visible navigation, and a single contact area. Stockroom is currently the only published case study. Further projects can be added when their implementations are ready.
 
-- Optionally supply Upwork, Mostaqel, GitHub, and project URLs. Email and LinkedIn are configured.
-- Supply specific project outcomes and verification evidence. The current case studies explicitly state evidence limitations rather than claim unverified results.
-- For the Tasks API DELETE example, provide the original route, reproduction steps, root cause, change, and verification result. No resolution is invented in this version.
+The request illustration uses CSS 3D and has a pause control. The core skills ribbon stops on hover or keyboard focus. Both become static under reduced motion, with all skills wrapping into view.
 
-Project diagrams are original illustrations, not screenshots of production systems. They contain no client data, internal endpoints, logs, or credentials.
+Design references: [visual hierarchy](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/), [contrast](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html), and [text spacing](https://www.w3.org/WAI/WCAG22/Understanding/text-spacing.html).
 
-## Checks
+## Contact behavior
+
+Edit src/config.ts for public contact and project links. Missing profile links are hidden. Email and LinkedIn are configured.
+
+The email address always opens a blank message and can be copied. The contact selector offers a bug report, a project inquiry, or a general message. Only a bug report adds a subject and body to Gmail or the default email app. Visitors can edit the report before opening their draft. Project inquiries, including volunteer opportunities, open blank drafts.
+
+No message is submitted from this website. The report stays in React memory for the current page visit and is not saved to a server or browser storage.
+
+## Verification
 
 ```sh
 npx playwright install chromium
-npx playwright test
+npm test
 ```
 
-The browser suite checks 320, 390, 768, and 1440px layouts, horizontal overflow, reduced motion, keyboard access, links, case-study disclosure controls, clipboard behavior, runtime errors, and axe WCAG A/AA checks including contrast. Screenshots are generated in `qa/` and excluded from Git. Automated accessibility testing does not replace a screen-reader review.
+The browser suite covers widths of 320, 390, 768, and 1440 pixels, keyboard controls, contrast scans in each contact mode, reduced motion, clipboard fallback, edited bug drafts, blank general drafts, and user text spacing. Screenshots are generated in qa and excluded from Git. Automated checks do not replace a screen reader review.
+
+## Optional content
+
+Supply Upwork and Mostaqel profile links when ready. Add only project outcomes and testimonials that can be supported by evidence. The Stockroom screenshot contains fictional demo data.
