@@ -13,7 +13,11 @@ for (const width of [320, 390, 768, 1440]) {
     await page.goto("/");
     await page.locator("summary").click();
     expect(await page.evaluate(noOverflow)).toBe(true);
-    await expect(page.locator("h1")).toHaveCount(1);
+    await expect(page.locator("h1")).toHaveText(
+      "I build and fix web applications.",
+    );
+    for (const name of ["Build something new", "Fix what’s broken"])
+      await expect(page.getByRole("heading", { name })).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Stockroom", exact: true }),
     ).toBeVisible();
@@ -44,7 +48,7 @@ for (const width of [320, 390, 768, 1440]) {
           .analyze()
       ).violations,
     ).toEqual([]);
-    for (const name of ["A project", "Something else"]) {
+    for (const name of ["A bug", "Something else"]) {
       await page.getByRole("radio", { name, exact: true }).check();
       expect(
         (
@@ -55,7 +59,7 @@ for (const width of [320, 390, 768, 1440]) {
       ).toEqual([]);
       expect(await page.evaluate(noOverflow)).toBe(true);
     }
-    await page.getByRole("radio", { name: "A bug", exact: true }).check();
+    await page.getByRole("radio", { name: "A project", exact: true }).check();
     await page.locator("summary").click();
     await page.evaluate(() => scrollTo(0, 0));
     await page.screenshot({ path: `qa/layout-${width}.png`, fullPage: true });
@@ -78,10 +82,10 @@ test("keyboard navigation and active section", async ({ page }) => {
     nav.getByRole("link", { name: "Work", exact: true }),
   ).toHaveAttribute("aria-current", "true");
 
-  await page.getByRole("radio", { name: "A bug", exact: true }).focus();
+  await page.getByRole("radio", { name: "A project", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
   await expect(
-    page.getByRole("radio", { name: "A project", exact: true }),
+    page.getByRole("radio", { name: "A bug", exact: true }),
   ).toBeChecked();
   await page.keyboard.press("ArrowRight");
   await expect(
@@ -103,7 +107,12 @@ test("bug drafts use the edited report; other drafts stay blank", async ({
 }) => {
   await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto("/");
-  await page.getByRole("link", { name: "Tell me about your bug" }).click();
+  await expect(
+    page.getByRole("radio", { name: "A project", exact: true }),
+  ).toBeChecked();
+  await page
+    .getByRole("link", { name: "Something broken? Report a bug" })
+    .click();
   await expect(
     page.getByRole("radio", { name: "A bug", exact: true }),
   ).toBeChecked();
@@ -174,7 +183,13 @@ test("bug drafts use the edited report; other drafts stay blank", async ({
   await expect(
     page.getByRole("radio", { name: "Something else", exact: true }),
   ).toBeChecked();
-  await page.getByRole("link", { name: "Tell me about your bug" }).click();
+  await page.getByRole("link", { name: "Tell me about your project" }).click();
+  await expect(
+    page.getByRole("radio", { name: "A project", exact: true }),
+  ).toBeChecked();
+  await page
+    .getByRole("link", { name: "Something broken? Report a bug" })
+    .click();
   await expect(
     page.getByRole("textbox", { name: /Your bug report/ }),
   ).toHaveValue(text);

@@ -1,6 +1,6 @@
 # Abdulrhman Yaghi portfolio
 
-A React, TypeScript, and Vite portfolio for backend development and application bug fixes.
+A React, TypeScript, and Vite portfolio for a backend developer who builds web applications and fixes bugs in existing ones.
 
 Live website: https://abdulrhman-portfolio.pages.dev/
 
@@ -42,7 +42,7 @@ Design references: [visual hierarchy](https://www.nngroup.com/articles/visual-hi
 
 Edit src/config.ts for public contact and project links. Missing profile links are hidden. Email and LinkedIn are configured.
 
-The email address is not printed on the page. Visitors use the contact card's email button or copy the address with a button; the address is only shown if copying fails. The contact selector offers a bug report, a project inquiry, or a general message. Only a bug report adds a subject and body to Gmail or the default email app. Visitors can edit the report before opening their draft. Project inquiries, including volunteer opportunities, open blank drafts.
+The email address is not printed on the page. Visitors use the contact card's email button or copy the address with a button; the address is only shown if copying fails. The contact selector offers a project inquiry (the default), a bug report, or a general message. Only a bug report adds a subject and body to Gmail or the default email app. Visitors can edit the report before opening their draft. Project inquiries, including volunteer opportunities, open blank drafts.
 
 No message is submitted from this website. The report stays in React memory for the current page visit and is not saved to a server or browser storage.
 

@@ -1,7 +1,7 @@
 {
   "label": "after",
   "base": "http://127.0.0.1:4174",
-  "date": "2026-11-14T09:35:12.515Z",
+  "date": "2026-11-14T09:47:07.366Z",
   "pages": {
     "404": {
       "route": "/this-page-does-not-exist",
@@ -115,9 +115,9 @@
       },
       "status": 200,
       "facts": {
-        "title": "Abdulrhman Yaghi — I Fix Bugs in Web Applications",
+        "title": "Abdulrhman Yaghi — I Build and Fix Web Applications",
         "lang": "en",
-        "description": "Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+        "description": "Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues.",
         "canonical": "https://abdulrhman-portfolio.pages.dev/",
         "robots": null,
         "og": [
@@ -125,39 +125,45 @@
           "og:site_name=Abdulrhman Yaghi",
           "og:locale=en_US",
           "og:url=https://abdulrhman-portfolio.pages.dev/",
-          "og:title=Abdulrhman Yaghi — I Fix Bugs in Web Applications",
-          "og:description=Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+          "og:title=Abdulrhman Yaghi — I Build and Fix Web Applications",
+          "og:description=Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues.",
           "og:image=https://abdulrhman-portfolio.pages.dev/og-image.png",
           "og:image:width=1200",
           "og:image:height=630",
-          "og:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I fix bugs in web applications."
+          "og:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I build and fix web applications."
         ],
         "twitter": [
           "twitter:card=summary_large_image",
-          "twitter:title=Abdulrhman Yaghi — I Fix Bugs in Web Applications",
-          "twitter:description=Backend developer in Amman, Jordan. I fix bugs in web applications: broken APIs, login issues, database errors and failed jobs, mainly in Laravel.",
+          "twitter:title=Abdulrhman Yaghi — I Build and Fix Web Applications",
+          "twitter:description=Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues.",
           "twitter:image=https://abdulrhman-portfolio.pages.dev/og-image.png",
-          "twitter:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I fix bugs in web applications."
+          "twitter:image:alt=Abdulrhman Yaghi, backend developer in Amman, Jordan: I build and fix web applications."
         ],
         "jsonld": [
           "{\"@context\":\"https://schema.org\",\"@type\":\"Person\",\"name\":\"Abdulrhman Yaghi\",\"jobTitle\":\"Backend Developer\",\"url\":\"https://abdulrhman-portfolio.pages.dev/\",\"image\":\"https://abdulrhman-portfolio.pages.dev/og-image.png\",\"address\":{\"@type\":\"PostalAddress\",\"addressLocality\":\"Amman\",\"addressCountry\":\"Jordan\"},\"knowsAbout\":[\"PHP\",\"Laravel\",\"Python\",\"Django\",\"REST APIs\",\"SQL\",\"PostgreSQL\"],\"sameAs\":[\"https://www.linkedin.com/in/abdalrhman-yaghi/\"]}"
         ],
         "headings": [
-          "H1 I fix bugs in web applications.",
+          "H1 I build and fix web applications.",
           "H2 How it works",
-          "H3 You tell me what’s broken",
-          "H3 I find the cause",
-          "H3 You get a verified fix",
+          "H3 You tell me what you need",
+          "H3 I plan it, or trace it",
+          "H3 You get software that works",
           "H2 What I can help with",
-          "H3 Application bug fixes",
-          "H3 APIs & authentication",
-          "H3 SQL & database issues",
-          "H3 Queues & deployments",
+          "H3 Build something new",
+          "H4 Web applications",
+          "H4 APIs & integrations",
+          "H4 Features for existing apps",
+          "H3 Fix what’s broken",
+          "H4 Application bug fixes",
+          "H4 APIs & authentication",
+          "H4 SQL & database issues",
+          "H4 Queues & deployments",
           "H2 Recent work",
           "H3 Stockroom",
           "H2 Hi, I’m Abdulrhman.",
           "H3 What I work with",
-          "H2 What can I help with?"
+          "H2 What can I help with?",
+          "H3 Let’s talk about your project."
         ],
         "imagesWithoutAlt": [],
         "smallestTextPx": 15.1994,
@@ -165,9 +171,9 @@
         "h1InInitialHtml": null
       },
       "rawHtml": {
-        "bytes": 14571,
+        "bytes": 15935,
         "hasH1": true,
-        "title": "Abdulrhman Yaghi — I Fix Bugs in Web Applications"
+        "title": "Abdulrhman Yaghi — I Build and Fix Web Applications"
       }
     }
   }

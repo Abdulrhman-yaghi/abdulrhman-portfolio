@@ -32,28 +32,28 @@
     "weight": 500,
     "large": false,
     "fg": "#b3bcc9",
-    "bg": "#0e1925",
-    "ratio": 9.25,
-    "worst": 9.15,
+    "bg": "#0e1826",
+    "ratio": 9.3,
+    "worst": 9.23,
     "need": 4.5,
     "pass": true
   },
   {
     "selector": "div.wrap.hero-inner > div.hero-copy > h1#hero-title",
-    "text": "I fix bugs in web applications.",
+    "text": "I build and fix web applications.",
     "size": 42.3014,
     "weight": 500,
     "large": true,
     "fg": "#f5f1ea",
-    "bg": "#0c1522",
-    "ratio": 16.28,
-    "worst": 15.9,
+    "bg": "#0c1422",
+    "ratio": 16.38,
+    "worst": 16.01,
     "need": 3,
     "pass": true
   },
   {
     "selector": "div.wrap.hero-inner > div.hero-copy > p.lead",
-    "text": "Broken APIs, login issues, database errors, or jobs that sto",
+    "text": "New features, APIs, and admin dashboards, built carefully. A",
     "size": 20.4,
     "weight": 400,
     "large": false,
@@ -66,7 +66,7 @@
   },
   {
     "selector": "div.hero-copy > div.actions > a.button",
-    "text": "Tell me about your bug",
+    "text": "Tell me about your project",
     "size": 16,
     "weight": 600,
     "large": false,
@@ -79,7 +79,7 @@
   },
   {
     "selector": "div.hero-copy > div.actions > a.text-link",
-    "text": "See my work",
+    "text": "Something broken? Report a bug",
     "size": 16,
     "weight": 500,
     "large": false,
@@ -144,7 +144,7 @@
   },
   {
     "selector": "li > div > h3",
-    "text": "You tell me what’s broken",
+    "text": "You tell me what you need",
     "size": 17,
     "weight": 600,
     "large": false,
@@ -157,7 +157,7 @@
   },
   {
     "selector": "li > div > p",
-    "text": "No technical brief needed. A short message is enough.",
+    "text": "A new project, a feature, or something that broke. A short m",
     "size": 16,
     "weight": 400,
     "large": false,
@@ -170,7 +170,7 @@
   },
   {
     "selector": "li > div > h3",
-    "text": "I find the cause",
+    "text": "I plan it, or trace it",
     "size": 17,
     "weight": 600,
     "large": false,
@@ -183,7 +183,7 @@
   },
   {
     "selector": "li > div > p",
-    "text": "I reproduce the issue, then follow the code, configuration, ",
+    "text": "I map out what to build, or reproduce the issue and follow t",
     "size": 16,
     "weight": 400,
     "large": false,
@@ -196,7 +196,7 @@
   },
   {
     "selector": "li > div > h3",
-    "text": "You get a verified fix",
+    "text": "You get software that works",
     "size": 17,
     "weight": 600,
     "large": false,
@@ -209,7 +209,7 @@
   },
   {
     "selector": "li > div > p",
-    "text": "A focused change, checked by repeating the original steps.",
+    "text": "I test the workflow before handing it over, so you can see i",
     "size": 16,
     "weight": 400,
     "large": false,
@@ -235,7 +235,7 @@
   },
   {
     "selector": "div.wrap > div.section-intro > p",
-    "text": "You don’t need to know the cause. Tell me what you expected ",
+    "text": "Starting something new, or stuck with something that broke? ",
     "size": 17.0005,
     "weight": 400,
     "large": false,
@@ -247,9 +247,35 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > h3",
-    "text": "Application bug fixes",
-    "size": 20.4,
+    "selector": "div.service-groups > section.card.service-group > h3#build-title",
+    "text": "Build something new",
+    "size": 24.48,
+    "weight": 500,
+    "large": true,
+    "fg": "#0b1220",
+    "bg": "#ffffff",
+    "ratio": 18.72,
+    "worst": 18.72,
+    "need": 3,
+    "pass": true
+  },
+  {
+    "selector": "div.service-groups > section.card.service-group > p.group-intro",
+    "text": "From a first version to a working product.",
+    "size": 17.0005,
+    "weight": 400,
+    "large": false,
+    "fg": "#576173",
+    "bg": "#ffffff",
+    "ratio": 6.25,
+    "worst": 6.25,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > h4",
+    "text": "Web applications",
+    "size": 17.0005,
     "weight": 600,
     "large": false,
     "fg": "#0b1220",
@@ -260,7 +286,111 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > p",
+    "selector": "li.service > div > p",
+    "text": "Laravel applications with clear data models, business rules,",
+    "size": 17.0005,
+    "weight": 400,
+    "large": false,
+    "fg": "#576173",
+    "bg": "#ffffff",
+    "ratio": 6.25,
+    "worst": 6.25,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > h4",
+    "text": "APIs & integrations",
+    "size": 17.0005,
+    "weight": 600,
+    "large": false,
+    "fg": "#0b1220",
+    "bg": "#ffffff",
+    "ratio": 18.72,
+    "worst": 18.72,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > p",
+    "text": "REST APIs with validation and authentication, ready for a we",
+    "size": 17.0005,
+    "weight": 400,
+    "large": false,
+    "fg": "#576173",
+    "bg": "#ffffff",
+    "ratio": 6.25,
+    "worst": 6.25,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > h4",
+    "text": "Features for existing apps",
+    "size": 17.0005,
+    "weight": 600,
+    "large": false,
+    "fg": "#0b1220",
+    "bg": "#ffffff",
+    "ratio": 18.72,
+    "worst": 18.72,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > p",
+    "text": "New features added to an application you already have, writt",
+    "size": 17.0005,
+    "weight": 400,
+    "large": false,
+    "fg": "#576173",
+    "bg": "#ffffff",
+    "ratio": 6.25,
+    "worst": 6.25,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "div.service-groups > section.card.service-group > h3#fix-title",
+    "text": "Fix what’s broken",
+    "size": 24.48,
+    "weight": 500,
+    "large": true,
+    "fg": "#0b1220",
+    "bg": "#ffffff",
+    "ratio": 18.72,
+    "worst": 18.72,
+    "need": 3,
+    "pass": true
+  },
+  {
+    "selector": "div.service-groups > section.card.service-group > p.group-intro",
+    "text": "You don’t need to know the cause.",
+    "size": 17.0005,
+    "weight": 400,
+    "large": false,
+    "fg": "#576173",
+    "bg": "#ffffff",
+    "ratio": 6.25,
+    "worst": 6.25,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > h4",
+    "text": "Application bug fixes",
+    "size": 17.0005,
+    "weight": 600,
+    "large": false,
+    "fg": "#0b1220",
+    "bg": "#ffffff",
+    "ratio": 18.72,
+    "worst": 18.72,
+    "need": 4.5,
+    "pass": true
+  },
+  {
+    "selector": "li.service > div > p",
     "text": "Unexpected errors or a feature that stopped working. I repro",
     "size": 17.0005,
     "weight": 400,
@@ -273,9 +403,9 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > h3",
+    "selector": "li.service > div > h4",
     "text": "APIs & authentication",
-    "size": 20.4,
+    "size": 17.0005,
     "weight": 600,
     "large": false,
     "fg": "#0b1220",
@@ -286,7 +416,7 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > p",
+    "selector": "li.service > div > p",
     "text": "Failed requests, validation errors, login problems, and acce",
     "size": 17.0005,
     "weight": 400,
@@ -299,9 +429,9 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > h3",
+    "selector": "li.service > div > h4",
     "text": "SQL & database issues",
-    "size": 20.4,
+    "size": 17.0005,
     "weight": 600,
     "large": false,
     "fg": "#0b1220",
@@ -312,7 +442,7 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > p",
+    "selector": "li.service > div > p",
     "text": "Incorrect results, failed queries, and data relationships th",
     "size": 17.0005,
     "weight": 400,
@@ -325,9 +455,9 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > h3",
+    "selector": "li.service > div > h4",
     "text": "Queues & deployments",
-    "size": 20.4,
+    "size": 17.0005,
     "weight": 600,
     "large": false,
     "fg": "#0b1220",
@@ -338,7 +468,7 @@
     "pass": true
   },
   {
-    "selector": "ul.services-grid > li.card.service > p",
+    "selector": "li.service > div > p",
     "text": "Laravel jobs that fail, reminders that never run, and config",
     "size": 17.0005,
     "weight": 400,
@@ -612,7 +742,7 @@
   },
   {
     "selector": "div.wrap.about > div.about-copy > p",
-    "text": "I like understanding how an existing system works, finding t",
+    "text": "I enjoy building features that are easy to follow, understan",
     "size": 17.0005,
     "weight": 400,
     "large": false,
@@ -898,7 +1028,7 @@
   },
   {
     "selector": "div.reason-options > label > span",
-    "text": "A bug",
+    "text": "A project",
     "size": 17.0005,
     "weight": 500,
     "large": false,
@@ -911,7 +1041,7 @@
   },
   {
     "selector": "div.reason-options > label > span",
-    "text": "A project",
+    "text": "A bug",
     "size": 17.0005,
     "weight": 500,
     "large": false,
@@ -936,9 +1066,9 @@
     "pass": true
   },
   {
-    "selector": "div.contact-card > div.reason-body > label.brief-label",
-    "text": "Your bug report",
-    "size": 17.0005,
+    "selector": "div.contact-card > div.reason-body > h3",
+    "text": "Let’s talk about your project.",
+    "size": 20.4,
     "weight": 600,
     "large": false,
     "fg": "#f5f1ea",
@@ -949,22 +1079,9 @@
     "pass": true
   },
   {
-    "selector": "div.reason-body > label.brief-label > span",
-    "text": "Optional. Edit it here or in your email.",
-    "size": 14.1664,
-    "weight": 400,
-    "large": false,
-    "fg": "#b3bcc9",
-    "bg": "#131d31",
-    "ratio": 8.78,
-    "worst": 8.78,
-    "need": 4.5,
-    "pass": true
-  },
-  {
-    "selector": "div.contact-card > div.reason-body > p.helper",
-    "text": "Leave out passwords, access tokens, and private client data.",
-    "size": 14.1664,
+    "selector": "div.contact-card > div.reason-body > p",
+    "text": "Tell me what you want to build or improve, your timeline, an",
+    "size": 17.0005,
     "weight": 400,
     "large": false,
     "fg": "#b3bcc9",
@@ -976,7 +1093,7 @@
   },
   {
     "selector": "div.contact-card > div.actions.contact-actions > a.button",
-    "text": "Email this report",
+    "text": "Email me",
     "size": 16,
     "weight": 600,
     "large": false,
@@ -1002,7 +1119,7 @@
   },
   {
     "selector": "div.wrap.contact > div.contact-card > p.helper",
-    "text": "Your report opens as a draft. Review it before sending.",
+    "text": "Your email opens as a blank draft.",
     "size": 14.1664,
     "weight": 400,
     "large": false,
@@ -1010,19 +1127,6 @@
     "bg": "#131d31",
     "ratio": 8.78,
     "worst": 8.78,
-    "need": 4.5,
-    "pass": true
-  },
-  {
-    "selector": "div.wrap.contact > div.contact-card > button.link-button",
-    "text": "Copy the report instead",
-    "size": 16,
-    "weight": 500,
-    "large": false,
-    "fg": "#f2b441",
-    "bg": "#131d31",
-    "ratio": 9.12,
-    "worst": 9.12,
     "need": 4.5,
     "pass": true
   },
