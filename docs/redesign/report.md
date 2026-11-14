@@ -47,7 +47,7 @@ Lighthouse raw files: `baseline-lighthouse*.json`, `main-lighthouse*.json`, `aft
 | Check                        | Original and main                                      | New                                                                                                                                                                     |
 | ---------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<html lang>`                | `en`                                                   | `en`                                                                                                                                                                    |
-| Title                        | "Abdulrhman Yaghi — Application Bug Fixes" (40)        | "Abdulrhman Yaghi — I Build and Fix Web Applications" (51), matching the hero                                                                                           |
+| Title                        | "Abdulrhman Yaghi — Application Bug Fixes" (40)        | "Abdulrhman Yaghi builds and fixes web applications" (50), matching the hero, with no separator                                                                         |
 | Description                  | 135 chars                                              | 154 chars: "Backend developer in Amman, Jordan. I build web applications and APIs, mainly in Laravel, and fix bugs in existing ones: login, database and queue issues." |
 | Canonical                    | missing                                                | `https://abdulrhman-portfolio.pages.dev/` (your README confirms this is the live site)                                                                                  |
 | Open Graph / Twitter         | none                                                   | 10 OG + 5 Twitter tags, `summary_large_image`                                                                                                                           |
@@ -60,7 +60,7 @@ Lighthouse raw files: `baseline-lighthouse*.json`, `main-lighthouse*.json`, `aft
 | Image alt                    | complete                                               | complete                                                                                                                                                                |
 
 - **The 404 page has no canonical, on purpose.** Error pages are `noindex`, and a canonical would contradict that.
-- **The production origin is stored once,** as `VITE_SITE_URL` in `.env`. Change one line for a custom domain.
+- **The production address is stored once,** as `siteUrl` in `src/config.ts` next to your other public links. Change one line for a custom domain. (An earlier version kept it in a committed `.env` file; it was public, never a secret, but `.env` files are now ignored by Git.)
 - **Preview deployments** (for example a branch URL) canonicalise to production, so they don't compete in search.
 
 ## 3. Design
@@ -184,7 +184,6 @@ All 93 text elements at 1440px and 90 at 390px pass WCAG AA. The lowest is **5.5
 
 **Added**
 
-- `.env`: `VITE_SITE_URL`
 - `404.html`, `src/not-found.css`
 - `src/entry-server.tsx`, `scripts/prerender.mjs`: prerender, font preloads, JSON-LD, sitemap, robots
 - `scripts/og-image.mjs`, `public/og-image.png`
@@ -207,4 +206,4 @@ All 93 text elements at 1440px and 90 at 390px pass WCAG AA. The lowest is **5.5
 1. **Projects vs. bug fixes:** the site now gives both equal weight. If you'd like project work to lead even more strongly (for example, a "Recent work" section above services), that's a small reorder.
 2. **Skills grouping:** is "Most experience: Laravel, PHP, REST APIs / Also: Python, Django, SQL, PostgreSQL, Git / Tools: Filament, Docker, Laravel Passport" accurate?
 3. **Profiles:** should GitHub (`github.com/Abdulrhman-yaghi`) appear in the contact section and JSON-LD? Do you have Upwork or Mostaqel profiles to add?
-4. **Domain:** will a custom domain replace `abdulrhman-portfolio.pages.dev`? It's one line in `.env`.
+4. **Domain:** will a custom domain replace `abdulrhman-portfolio.pages.dev`? It's one line in `src/config.ts`.

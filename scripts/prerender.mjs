@@ -1,24 +1,20 @@
 // Runs after `vite build` and the SSR build of src/entry-server.tsx.
 // 1. Injects the server-rendered app into dist/index.html (content visible without JS).
 // 2. Adds Person JSON-LD built from src/config.ts (only links that are public on the site).
-// 3. Writes dist/sitemap.xml and dist/robots.txt using VITE_SITE_URL from .env.
+// 3. Writes dist/sitemap.xml and dist/robots.txt using siteUrl from src/config.ts.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { loadEnv } from "vite";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const dist = path.join(root, "dist");
 const ssrDir = path.join(root, "dist-ssr");
-const site = loadEnv("production", root, "VITE_").VITE_SITE_URL?.replace(
-  /\/$/,
-  "",
-);
-if (!site) throw new Error("VITE_SITE_URL is not set (see .env)");
 
 const { render, profile } = await import(
   pathToFileURL(path.join(ssrDir, "entry-server.js")).href
 );
+const site = profile.siteUrl?.replace(/\/$/, "");
+if (!site) throw new Error("profile.siteUrl is not set (see src/config.ts)");
 
 const person = {
   "@context": "https://schema.org",
